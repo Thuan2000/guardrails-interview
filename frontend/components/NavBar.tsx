@@ -10,15 +10,13 @@ import {
   Tooltip,
   UnstyledButton,
   createStyles,
-  IconListCheck,
   Stack,
 } from "@mantine/core";
 import {
   TablerIcon,
   IconHome2,
-  IconLogout,
   IconList,
-  IconSwitchHorizontal,
+  IconListCheck,
   IconForms,
 } from "@tabler/icons";
 import { useRouter } from "next/router";
