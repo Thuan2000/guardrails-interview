@@ -1,0 +1,9 @@
+.DS_Store
+
+/node_modules
+/tmp
+/dist
+
+*.log
+.env
+graphql.schema.json

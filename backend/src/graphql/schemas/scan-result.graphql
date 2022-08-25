@@ -1,0 +1,37 @@
+input ScanResultInput {
+  repositoryName: String!
+  findings: [FindingInput]!
+}
+
+input PositionsBeginInput {
+  line: Int!
+}
+
+input PositionsInput {
+  begin: PositionsBeginInput!
+}
+
+input FindingLocationInput {
+  path: String!
+  positions: PositionsInput!
+}
+
+input FindingMetadataInput {
+  description: String!
+  severity: String!
+}
+
+input FindingInput {
+  type: String!
+  # ruleId: String!
+  # location: FindingLocationInput!
+  # metadata: FindingMetadataInput!
+}
+
+type Mutation {
+  scan(input: ScanResultInput!): Response
+}
+
+type Query {
+  getScans: String
+}

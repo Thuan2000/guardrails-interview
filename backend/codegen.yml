@@ -1,0 +1,16 @@
+overwrite: true
+schema: "./src/graphql/schemas/**/*.graphql"
+documents: null
+generates:
+    src/graphql/types.d.ts:
+        plugins:
+            - add: '/* tslint:disable */'
+            - "typescript"
+            - "typescript-resolvers"
+    ./graphql.schema.json:
+        plugins:
+            - "introspection"
+config:
+    enumsAsTypes: true
+    skipTypename: true
+    typesPrefix: I
