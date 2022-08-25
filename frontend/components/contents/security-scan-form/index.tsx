@@ -1,3 +1,8 @@
+/**
+ * Copyright Thuan Nguyen ©2022
+ * Good codes make the world a better place!
+ */
+ 
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { Button, Container, Form, Header } from "semantic-ui-react";
 import { useForm, useFieldArray } from "react-hook-form";

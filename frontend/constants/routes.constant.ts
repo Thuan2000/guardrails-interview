@@ -6,6 +6,7 @@
 
 export const ROUTES = {
   home: "/",
-  page1: "/page-1",
-  page2: "/page-2",
+  scanInputFormPage: "/scan-input-form",
+  allScansPage: "/all-scans",
+  selectedScansPage: "/selected-scans",
 };

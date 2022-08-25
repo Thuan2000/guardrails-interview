@@ -3,7 +3,6 @@
  * Good codes make the world a better place!
  */
 
-import { useState } from "react";
 import {
   Image,
   Navbar,
@@ -11,6 +10,7 @@ import {
   Tooltip,
   UnstyledButton,
   createStyles,
+  IconListCheck,
   Stack,
 } from "@mantine/core";
 import {
@@ -84,8 +84,9 @@ function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
 
 const mockdata = [
   { icon: IconHome2, label: "Home", href: ROUTES.home },
-  { icon: IconForms, label: "Scan Form", href: ROUTES.page1 },
-  { icon: IconList, label: "See Scans", href: ROUTES.page2 },
+  { icon: IconForms, label: "Input Scan Result", href: ROUTES.scanInputFormPage },
+  { icon: IconList, label: "All Scan Results", href: ROUTES.allScansPage },
+  { icon: IconListCheck, label: "Selected Scan Results", href: ROUTES.selectedScansPage },
 ];
 
 function getIsActive(href: string, pathname: string) {
@@ -121,12 +122,6 @@ export function NavbarMinimal() {
       <Navbar.Section grow mt={50}>
         <Stack justify="center" spacing={0}>
           {links}
-        </Stack>
-      </Navbar.Section>
-      <Navbar.Section>
-        <Stack justify="center" spacing={0}>
-          <NavbarLink icon={IconSwitchHorizontal} label="Change account" />
-          <NavbarLink icon={IconLogout} label="Logout" />
         </Stack>
       </Navbar.Section>
     </Navbar>
