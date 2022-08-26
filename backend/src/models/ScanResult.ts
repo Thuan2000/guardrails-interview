@@ -1,20 +1,37 @@
-import { DataTypes, Model, ModelStatic } from 'sequelize';
-import Database from '../services/database.service';
+/**
+ * Copyright Thuan Nguyen ©2022
+ * Good codes make the world a better place!
+ */
 
-class ScanResult extends Model {}
+import { Model, DataTypes } from "sequelize";
+import Database from "../services/database.service";
+import ScanResultFinding from './ScanResultFinding';
+
+class ScanResult extends Model {
+  static associate() {
+    // define association here
+  }
+}
 
 // Initialize Model
 ScanResult.init(
   {
     repositoryName: DataTypes.STRING,
     status: DataTypes.STRING,
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE
+    findings: DataTypes.JSON,
+    queuedAt: 'TIMESTAMP',
+    scanningAt: 'TIMESTAMP',
+    finishedAt: 'TIMESTAMP'
   },
   {
+    tableName: "scan-result",
     sequelize: Database.sequelize,
-    modelName: 'ScanResult'
+    modelName: "ScanResult"
   }
 );
+
+ScanResult.hasMany(ScanResultFinding, {
+  foreignKey: "scanResultId",
+});
 
 export default ScanResult;

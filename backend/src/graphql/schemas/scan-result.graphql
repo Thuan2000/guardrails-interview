@@ -1,10 +1,26 @@
-input ScanResultInput {
-  repositoryName: String!
-  findings: [FindingInput]!
+# Copyright Thuan Nguyen ©2022
+# Good codes make the world a better place!
+
+enum EStatus {
+  Queued
+  InProgress
+  Success
+  Failure
 }
 
-input PositionsBeginInput {
-  line: Int!
+enum ESeverity {
+  HIGH
+  LOW
+  MODERATE
+}
+
+input ScanResultInput {
+  repositoryName: String!
+  status: EStatus!
+  findings: [FindingInput]!
+  queuedAt: Timestamp!
+  scanningAt: Timestamp!
+  finishedAt: Timestamp!
 }
 
 input PositionsInput {
@@ -23,13 +39,16 @@ input FindingMetadataInput {
 
 input FindingInput {
   type: String!
-  # ruleId: String!
-  # location: FindingLocationInput!
-  # metadata: FindingMetadataInput!
+  ruleId: String!
+  locationPath: String!
+  locationBeginLine: Int!
+  locationEndLine: Int!
+  metaDescription: String!
+  metaSeverity: ESeverity!
 }
 
 type Mutation {
-  scan(input: ScanResultInput!): Response
+  inputNewScan(input: ScanResultInput!): Response
 }
 
 type Query {
