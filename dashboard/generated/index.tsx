@@ -14,38 +14,41 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Date: any;
 };
+
+
+export enum ESeverity {
+  High = 'HIGH',
+  Low = 'LOW',
+  Moderate = 'MODERATE'
+}
+
+export enum EStatus {
+  Queued = 'Queued',
+  InProgress = 'InProgress',
+  Success = 'Success',
+  Failure = 'Failure'
+}
 
 export type FindingInput = {
   type: Scalars['String'];
-};
-
-export type FindingLocationInput = {
-  path: Scalars['String'];
-  positions: PositionsInput;
-};
-
-export type FindingMetadataInput = {
-  description: Scalars['String'];
-  severity: Scalars['String'];
+  ruleId: Scalars['String'];
+  locationPath: Scalars['String'];
+  locationBeginLine: Scalars['Int'];
+  locationEndLine: Scalars['Int'];
+  metaDescription: Scalars['String'];
+  metaSeverity: ESeverity;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  scan?: Maybe<Response>;
+  inputNewScan?: Maybe<Response>;
 };
 
 
-export type MutationScanArgs = {
+export type MutationInputNewScanArgs = {
   input: ScanResultInput;
-};
-
-export type PositionsBeginInput = {
-  line: Scalars['Int'];
-};
-
-export type PositionsInput = {
-  begin: PositionsBeginInput;
 };
 
 export type Query = {
@@ -61,54 +64,58 @@ export type Response = {
 
 export type ScanResultInput = {
   repositoryName: Scalars['String'];
+  status: EStatus;
   findings: Array<Maybe<FindingInput>>;
+  queuedAt: Scalars['Date'];
+  scanningAt: Scalars['Date'];
+  finishedAt: Scalars['Date'];
 };
 
-export type ScanMutationVariables = Exact<{
+export type InputNewScanMutationVariables = Exact<{
   input: ScanResultInput;
 }>;
 
 
-export type ScanMutation = (
+export type InputNewScanMutation = (
   { __typename?: 'Mutation' }
-  & { scan?: Maybe<(
+  & { inputNewScan?: Maybe<(
     { __typename?: 'Response' }
     & Pick<Response, 'message' | 'success'>
   )> }
 );
 
 
-export const ScanDocument = gql`
-    mutation Scan($input: ScanResultInput!) {
-  scan(input: $input) {
+export const InputNewScanDocument = gql`
+    mutation InputNewScan($input: ScanResultInput!) {
+  inputNewScan(input: $input) {
     message
     success
   }
 }
     `;
-export type ScanMutationFn = Apollo.MutationFunction<ScanMutation, ScanMutationVariables>;
+export type InputNewScanMutationFn = Apollo.MutationFunction<InputNewScanMutation, InputNewScanMutationVariables>;
 
 /**
- * __useScanMutation__
+ * __useInputNewScanMutation__
  *
- * To run a mutation, you first call `useScanMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useScanMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useInputNewScanMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInputNewScanMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [scanMutation, { data, loading, error }] = useScanMutation({
+ * const [inputNewScanMutation, { data, loading, error }] = useInputNewScanMutation({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useScanMutation(baseOptions?: Apollo.MutationHookOptions<ScanMutation, ScanMutationVariables>) {
+export function useInputNewScanMutation(baseOptions?: Apollo.MutationHookOptions<InputNewScanMutation, InputNewScanMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<ScanMutation, ScanMutationVariables>(ScanDocument, options);
+        return Apollo.useMutation<InputNewScanMutation, InputNewScanMutationVariables>(InputNewScanDocument, options);
       }
-export type ScanMutationHookResult = ReturnType<typeof useScanMutation>;
-export type ScanMutationResult = Apollo.MutationResult<ScanMutation>;
-export type ScanMutationOptions = Apollo.BaseMutationOptions<ScanMutation, ScanMutationVariables>;
+export type InputNewScanMutationHookResult = ReturnType<typeof useInputNewScanMutation>;
+export type InputNewScanMutationResult = Apollo.MutationResult<InputNewScanMutation>;
+export type InputNewScanMutationOptions = Apollo.BaseMutationOptions<InputNewScanMutation, InputNewScanMutationVariables>;

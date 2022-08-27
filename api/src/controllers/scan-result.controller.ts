@@ -12,6 +12,7 @@ class ScanResultController {
    * @returns
    */
   static async scan(_input: IScanResultInput) {
+    console.log(_input);
     // This variable will be appended by several attributes to be saved on database
     // const value = {};
 

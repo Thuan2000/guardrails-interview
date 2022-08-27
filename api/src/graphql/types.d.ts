@@ -1,5 +1,5 @@
 /* tslint:disable */
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -12,7 +12,9 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Date: any;
 };
+
 
 export type IESeverity =
   | 'HIGH'
@@ -57,9 +59,9 @@ export type IScanResultInput = {
   repositoryName: Scalars['String'];
   status: IEStatus;
   findings: Array<Maybe<IFindingInput>>;
-  queuedAt: Scalars['Int'];
-  scanningAt: Scalars['Int'];
-  finishedAt: Scalars['Int'];
+  queuedAt: Scalars['Date'];
+  scanningAt: Scalars['Date'];
+  finishedAt: Scalars['Date'];
 };
 
 
@@ -153,6 +155,7 @@ export type IResolversTypes = {
   FindingInput: IFindingInput;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   ESeverity: IESeverity;
+  Date: ResolverTypeWrapper<Scalars['Date']>;
   Response: ResolverTypeWrapper<IResponse>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
@@ -165,9 +168,14 @@ export type IResolversParentTypes = {
   ScanResultInput: IScanResultInput;
   FindingInput: IFindingInput;
   Int: Scalars['Int'];
+  Date: Scalars['Date'];
   Response: IResponse;
   Boolean: Scalars['Boolean'];
 };
+
+export interface IDateScalarConfig extends GraphQLScalarTypeConfig<IResolversTypes['Date'], any> {
+  name: 'Date';
+}
 
 export type IMutationResolvers<ContextType = any, ParentType extends IResolversParentTypes['Mutation'] = IResolversParentTypes['Mutation']> = {
   inputNewScan?: Resolver<Maybe<IResolversTypes['Response']>, ParentType, ContextType, RequireFields<IMutationInputNewScanArgs, 'input'>>;
@@ -184,7 +192,9 @@ export type IResponseResolvers<ContextType = any, ParentType extends IResolversP
 };
 
 export type IResolvers<ContextType = any> = {
+  Date?: GraphQLScalarType;
   Mutation?: IMutationResolvers<ContextType>;
   Query?: IQueryResolvers<ContextType>;
   Response?: IResponseResolvers<ContextType>;
 };
+

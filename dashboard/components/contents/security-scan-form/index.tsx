@@ -3,47 +3,59 @@
  * Good codes make the world a better place!
  */
  
-import React, { ChangeEvent, useEffect, useState } from "react";
-import { Button, Container, Form, Header } from "semantic-ui-react";
-import { useForm, useFieldArray } from "react-hook-form";
+import React, { ChangeEvent, useEffect } from "react";
+import {
+  Button,
+  Divider,
+  DropdownItemProps,
+  Form,
+  Grid,
+  Segment,
+} from "semantic-ui-react";
+import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 
 import {
-  FindingInput,
   ScanResultInput,
-  useScanMutation,
-  ScanMutation,
+  useInputNewScanMutation,
+  InputNewScanMutation,
+  FindingInput,
+  EStatus,
 } from "../../../generated/index";
 import { fireSuccessSwalModal } from "functions/swal.function";
-import { IconPlus } from "@tabler/icons";
-
-interface ISecurityScanFormValue {
-  repositoryName: string;
-}
-
-const securityScanSchema = yup.object({
-  repositoryName: yup.string().required("Please fill repository name input"),
-});
+import FindingsForm from "./FindingsForm";
+import {
+  ISecurityScanFormValue,
+  securityScanSchema,
+} from "./SecurityScanFormSchema";
+import SemanticDatepicker from "react-semantic-ui-datepickers";
+import { toTitleCase } from "functions/util.function";
 
 interface ISecurityScanFormProps {}
 
+const statusOptions: DropdownItemProps[] = Object.values(EStatus).map((s) => ({
+  text: toTitleCase(s),
+  value: s,
+}));
+
 const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ ...props }) => {
+  const methods = useForm<ISecurityScanFormValue>({
+    resolver: yupResolver(securityScanSchema),
+  });
   const {
     handleSubmit,
     trigger,
     setValue,
     getValues,
     register,
-    control,
     formState: { errors },
-  } = useForm<ISecurityScanFormValue>({
-    resolver: yupResolver(securityScanSchema),
-  });
+  } = methods;
 
-  const { append, fields } = useFieldArray({ control, name: "findings" });
+  useEffect(() => {
+    register("repositoryName");
+  }, []);
 
-  const [scan] = useScanMutation({ onCompleted: handleComplete });
+  const [scan] = useInputNewScanMutation({ onCompleted: handleComplete });
 
   /**
    * Reset all field value
@@ -56,8 +68,8 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ ...props }) => {
    * Handling if mutation is fired and is completed
    * @param resp From api
    */
-  async function handleComplete(resp: ScanMutation) {
-    if (resp.scan.success) {
+  async function handleComplete(resp: InputNewScanMutation) {
+    if (resp.inputNewScan.success) {
       fireSuccessSwalModal(
         "Success Add Security Scan",
         "Security scan added successfully, and you can see it on security scan list page"
@@ -72,15 +84,27 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ ...props }) => {
    * @param value FormValue
    */
   async function onSubmit(value: ISecurityScanFormValue) {
-    const findings: FindingInput[] = [
-      {
-        type: "acsd",
-      },
-    ];
+    const findings = value.findings.map((f) => {
+      const finding: FindingInput = {
+        type: f.type,
+        ruleId: f.ruleId,
+        locationBeginLine: f.begin,
+        locationEndLine: f.end,
+        locationPath: f.path,
+        metaDescription: f.description,
+        metaSeverity: f.severityType,
+      };
+
+      return finding;
+    });
 
     const input: ScanResultInput = {
       repositoryName: value.repositoryName,
       findings,
+      status: value.status,
+      finishedAt: value.finishedAt,
+      queuedAt: value.queuedAt,
+      scanningAt: value.scanningAt,
     };
 
     const { data } = await scan({
@@ -95,34 +119,76 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ ...props }) => {
    * we customize the value like this
    * @param e HTML Change event
    */
-  function handleRepositoryNameChange(e: ChangeEvent<HTMLInputElement>) {
-    setValue("repositoryName", e.target.value);
-    trigger("repositoryName");
+  function handleInputChange(key, value: any) {
+    setValue(key, value);
+    trigger(key);
+  }
+
+  function getError(key) {
+    return errors?.[key]?.message;
   }
 
   return (
-    <Container fluid>
-      <Header textAlign="center" as="h3">
-        Add Your Security Scan By Filling This Form
-      </Header>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Form.Input
-          fluid
-          label="Repository Name"
-          {...register("repositoryName")}
-          placeholder="SDConnect"
-          value={getValues("repositoryName")}
-          onChange={handleRepositoryNameChange}
-          error={errors?.repositoryName?.message}
-        />
+    <Segment>
+      <FormProvider {...methods}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Form.Input
+            label="Repository Name"
+            placeholder="SDConnect"
+            value={getValues("repositoryName") || ""}
+            onChange={(e) =>
+              handleInputChange("repositoryName", e.target.value)
+            }
+            error={errors?.repositoryName?.message}
+          />
 
-        <Button type="button">
-          <IconPlus /> Add Finding
-        </Button>
+          <Form.Select
+            label="Status"
+            options={statusOptions}
+            onChange={(_, { value }) => {
+              handleInputChange("status", value);
+            }}
+            error={errors?.status?.message}
+          />
 
-        <Button color="blue">Submit</Button>
-      </Form>
-    </Container>
+          <FindingsForm />
+
+          <div style={{ padding: "10px 0 10px 0" }}>
+            <Grid>
+              <SemanticDatepicker
+                showToday
+                maxDate={new Date()}
+                label={"Queue Date"}
+                onChange={(e, { value }) => {
+                  handleInputChange(`queuedAt`, value);
+                }}
+                error={getError("queuedAt")}
+              />
+              <SemanticDatepicker
+                showToday
+                maxDate={new Date()}
+                label={"Scanning Date"}
+                onChange={(e, { value }) => {
+                  handleInputChange(`scanningAt`, value);
+                }}
+                error={getError("scanningAt")}
+              />
+              <SemanticDatepicker
+                showToday
+                maxDate={new Date()}
+                label={"Finished Date"}
+                onChange={(e, { value }) => {
+                  handleInputChange(`finishedAt`, value);
+                }}
+                error={getError("finishedAt")}
+              />
+            </Grid>
+          </div>
+          <Divider />
+          <Button color="blue">Submit</Button>
+        </Form>
+      </FormProvider>
+    </Segment>
   );
 };
 export default SecurityScanForm;
