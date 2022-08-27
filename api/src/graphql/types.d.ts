@@ -14,35 +14,34 @@ export type Scalars = {
   Float: number;
 };
 
+export type IESeverity =
+  | 'HIGH'
+  | 'LOW'
+  | 'MODERATE';
+
+export type IEStatus =
+  | 'Queued'
+  | 'InProgress'
+  | 'Success'
+  | 'Failure';
+
 export type IFindingInput = {
   type: Scalars['String'];
-};
-
-export type IFindingLocationInput = {
-  path: Scalars['String'];
-  positions: IPositionsInput;
-};
-
-export type IFindingMetadataInput = {
-  description: Scalars['String'];
-  severity: Scalars['String'];
+  ruleId: Scalars['String'];
+  locationPath: Scalars['String'];
+  locationBeginLine: Scalars['Int'];
+  locationEndLine: Scalars['Int'];
+  metaDescription: Scalars['String'];
+  metaSeverity: IESeverity;
 };
 
 export type IMutation = {
-  scan?: Maybe<IResponse>;
+  inputNewScan?: Maybe<IResponse>;
 };
 
 
-export type IMutationScanArgs = {
+export type IMutationInputNewScanArgs = {
   input: IScanResultInput;
-};
-
-export type IPositionsBeginInput = {
-  line: Scalars['Int'];
-};
-
-export type IPositionsInput = {
-  begin: IPositionsBeginInput;
 };
 
 export type IQuery = {
@@ -56,7 +55,11 @@ export type IResponse = {
 
 export type IScanResultInput = {
   repositoryName: Scalars['String'];
+  status: IEStatus;
   findings: Array<Maybe<IFindingInput>>;
+  queuedAt: Scalars['Int'];
+  scanningAt: Scalars['Int'];
+  finishedAt: Scalars['Int'];
 };
 
 
@@ -146,14 +149,12 @@ export type IResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>;
   Mutation: ResolverTypeWrapper<{}>;
   ScanResultInput: IScanResultInput;
+  EStatus: IEStatus;
   FindingInput: IFindingInput;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
+  ESeverity: IESeverity;
   Response: ResolverTypeWrapper<IResponse>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
-  FindingLocationInput: IFindingLocationInput;
-  PositionsInput: IPositionsInput;
-  PositionsBeginInput: IPositionsBeginInput;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
-  FindingMetadataInput: IFindingMetadataInput;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -163,17 +164,13 @@ export type IResolversParentTypes = {
   Mutation: {};
   ScanResultInput: IScanResultInput;
   FindingInput: IFindingInput;
+  Int: Scalars['Int'];
   Response: IResponse;
   Boolean: Scalars['Boolean'];
-  FindingLocationInput: IFindingLocationInput;
-  PositionsInput: IPositionsInput;
-  PositionsBeginInput: IPositionsBeginInput;
-  Int: Scalars['Int'];
-  FindingMetadataInput: IFindingMetadataInput;
 };
 
 export type IMutationResolvers<ContextType = any, ParentType extends IResolversParentTypes['Mutation'] = IResolversParentTypes['Mutation']> = {
-  scan?: Resolver<Maybe<IResolversTypes['Response']>, ParentType, ContextType, RequireFields<IMutationScanArgs, 'input'>>;
+  inputNewScan?: Resolver<Maybe<IResolversTypes['Response']>, ParentType, ContextType, RequireFields<IMutationInputNewScanArgs, 'input'>>;
 };
 
 export type IQueryResolvers<ContextType = any, ParentType extends IResolversParentTypes['Query'] = IResolversParentTypes['Query']> = {
@@ -191,5 +188,3 @@ export type IResolvers<ContextType = any> = {
   Query?: IQueryResolvers<ContextType>;
   Response?: IResponseResolvers<ContextType>;
 };
-
-

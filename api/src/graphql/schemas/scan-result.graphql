@@ -18,9 +18,9 @@ input ScanResultInput {
   repositoryName: String!
   status: EStatus!
   findings: [FindingInput]!
-  queuedAt: Timestamp!
-  scanningAt: Timestamp!
-  finishedAt: Timestamp!
+  queuedAt: Int!
+  scanningAt: Int!
+  finishedAt: Int!
 }
 
 input PositionsInput {

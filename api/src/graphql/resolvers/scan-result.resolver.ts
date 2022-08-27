@@ -7,7 +7,7 @@ import ScanResultController from '../../controllers/scan-result.controller';
 import { IScanResultInput } from '../types';
 
 export const Mutation = {
-  scan: (_: any, { input }: { input: IScanResultInput }) =>
+  inputNewScan: (_: any, { input }: { input: IScanResultInput }) =>
     ScanResultController.scan(input)
 };
 
