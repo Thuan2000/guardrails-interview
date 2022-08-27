@@ -18,20 +18,21 @@ ScanResult.init(
   {
     repositoryName: DataTypes.STRING,
     status: DataTypes.STRING,
-    findings: DataTypes.JSON,
-    queuedAt: 'TIMESTAMP',
-    scanningAt: 'TIMESTAMP',
-    finishedAt: 'TIMESTAMP'
+    queuedAt: DataTypes.DATE,
+    scanningAt: DataTypes.DATE,
+    finishedAt: DataTypes.DATE
   },
   {
-    tableName: "scan-result",
+    tableName: 'scan-result',
     sequelize: Database.sequelize,
-    modelName: "ScanResult"
+    modelName: 'ScanResult'
   }
 );
 
-ScanResult.hasMany(ScanResultFinding, {
-  foreignKey: "scanResultId",
+// TODO:Fix this typescript issue
+(ScanResult as any).hasMany(ScanResultFinding, {
+  foreignKey: 'scanResultId',
+  as: 'findings'
 });
 
 export default ScanResult;

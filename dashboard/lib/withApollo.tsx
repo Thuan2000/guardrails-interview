@@ -8,18 +8,22 @@ import {
 import { useRouter } from "next/router";
 import nextWithApollo from "next-with-apollo";
 
+export const generateApollo = (initialState, headers) => {
+  return new ApolloClient({
+    ssrMode: typeof window === "undefined",
+    link: new HttpLink({
+      uri: "http://localhost:8080/graphql",
+    }),
+    headers: {
+      ...(headers as Record<string, string>),
+    },
+    cache: new InMemoryCache().restore(initialState || {}),
+  });
+};
+
 const withApollo = nextWithApollo(
   ({ initialState, headers }) => {
-    return new ApolloClient({
-      ssrMode: typeof window === "undefined",
-      link: new HttpLink({
-        uri: "http://localhost:8080/graphql",
-      }),
-      headers: {
-        ...(headers as Record<string, string>),
-      },
-      cache: new InMemoryCache().restore(initialState || {}),
-    });
+    return generateApollo(initialState, headers);
   },
   {
     render: ({ Page, props }) => {

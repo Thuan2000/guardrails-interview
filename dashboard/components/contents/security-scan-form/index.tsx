@@ -3,7 +3,7 @@
  * Good codes make the world a better place!
  */
  
-import React, { ChangeEvent, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   Button,
   Divider,
@@ -62,6 +62,11 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ ...props }) => {
    */
   function resetForm() {
     setValue("repositoryName", "");
+    setValue("status", null);
+    setValue("queuedAt", null);
+    setValue("scanningAt", null);
+    setValue("finishedAt", null);
+    setValue("findings", []);
   }
 
   /**
@@ -75,7 +80,7 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ ...props }) => {
         "Security scan added successfully, and you can see it on security scan list page"
       );
 
-      resetForm();
+      // resetForm();
     }
   }
 
@@ -102,12 +107,12 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ ...props }) => {
       repositoryName: value.repositoryName,
       findings,
       status: value.status,
-      finishedAt: value.finishedAt,
-      queuedAt: value.queuedAt,
-      scanningAt: value.scanningAt,
+      finishedAt: new Date(value.finishedAt).getTime(),
+      queuedAt: new Date(value.queuedAt).getTime(),
+      scanningAt: new Date(value.scanningAt).getTime(),
     };
 
-    const { data } = await scan({
+    await scan({
       variables: {
         input,
       },
@@ -129,66 +134,65 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ ...props }) => {
   }
 
   return (
-    <Segment>
-      <FormProvider {...methods}>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <Form.Input
-            label="Repository Name"
-            placeholder="SDConnect"
-            value={getValues("repositoryName") || ""}
-            onChange={(e) =>
-              handleInputChange("repositoryName", e.target.value)
-            }
-            error={errors?.repositoryName?.message}
-          />
-
-          <Form.Select
-            label="Status"
-            options={statusOptions}
-            onChange={(_, { value }) => {
-              handleInputChange("status", value);
-            }}
-            error={errors?.status?.message}
-          />
-
-          <FindingsForm />
-
-          <div style={{ padding: "10px 0 10px 0" }}>
-            <Grid>
-              <SemanticDatepicker
-                showToday
-                maxDate={new Date()}
-                label={"Queue Date"}
-                onChange={(e, { value }) => {
-                  handleInputChange(`queuedAt`, value);
-                }}
-                error={getError("queuedAt")}
-              />
-              <SemanticDatepicker
-                showToday
-                maxDate={new Date()}
-                label={"Scanning Date"}
-                onChange={(e, { value }) => {
-                  handleInputChange(`scanningAt`, value);
-                }}
-                error={getError("scanningAt")}
-              />
-              <SemanticDatepicker
-                showToday
-                maxDate={new Date()}
-                label={"Finished Date"}
-                onChange={(e, { value }) => {
-                  handleInputChange(`finishedAt`, value);
-                }}
-                error={getError("finishedAt")}
-              />
-            </Grid>
-          </div>
-          <Divider />
-          <Button color="blue">Submit</Button>
-        </Form>
-      </FormProvider>
-    </Segment>
+    <div style={{ width: "868px", margin: "auto" }}>
+      <Segment>
+        <FormProvider {...methods}>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <Form.Input
+              label="Repository Name"
+              placeholder="SDConnect"
+              value={getValues("repositoryName") || ""}
+              onChange={(e) =>
+                handleInputChange("repositoryName", e.target.value)
+              }
+              error={errors?.repositoryName?.message}
+            />
+            <Form.Select
+              label="Status"
+              options={statusOptions}
+              onChange={(_, { value }) => {
+                handleInputChange("status", value);
+              }}
+              error={errors?.status?.message}
+            />
+            <FindingsForm />
+            <div style={{ padding: "10px 0 10px 0" }}>
+              <Grid>
+                <SemanticDatepicker
+                  showToday
+                  maxDate={new Date()}
+                  label={"Queue Date"}
+                  onChange={(e, { value }) => {
+                    handleInputChange(`queuedAt`, value);
+                  }}
+                  error={getError("queuedAt")}
+                />
+                <SemanticDatepicker
+                  showToday
+                  maxDate={new Date()}
+                  label={"Scanning Date"}
+                  onChange={(e, { value }) => {
+                    handleInputChange(`scanningAt`, value);
+                  }}
+                  error={getError("scanningAt")}
+                />
+                <SemanticDatepicker
+                  showToday
+                  maxDate={new Date()}
+                  label={"Finished Date"}
+                  onChange={(e, { value }) => {
+                    handleInputChange(`finishedAt`, value);
+                  }}
+                  error={getError("finishedAt")}
+                />
+              </Grid>
+            </div>
+            <Divider />
+            <Button color="blue">Submit</Button>
+          </Form>
+        </FormProvider>
+      </Segment>
+    </div>
   );
 };
 export default SecurityScanForm;

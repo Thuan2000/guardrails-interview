@@ -11,4 +11,6 @@ export const Mutation = {
     ScanResultController.scan(input)
 };
 
-export const Query = {};
+export const Query = {
+  getScans: () => ScanResultController.getScans()
+};

@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const tableName = "scan-result-finding";
+const tableName = 'scan-result-finding';
 
 module.exports = {
 	tableName,
@@ -14,23 +14,33 @@ module.exports = {
 			},
 			type: {
 				type: Sequelize.STRING,
-				allowNull: false,
+				allowNull: false
 			},
 			scanResultId: {
 				type: Sequelize.INTEGER,
-				allowNull: false,
+				allowNull: false
 			},
 			ruleId: {
 				type: Sequelize.STRING,
-				allowNull: false,
+				allowNull: false
 			},
 			location: {
 				type: Sequelize.JSON,
-				allowNull: true,
+				allowNull: true
 			},
 			metadata: {
 				type: Sequelize.JSON,
-				allowNull: true,
+				allowNull: true
+			},
+			createdAt: {
+				allowNull: false,
+				type: Sequelize.DATE,
+				defaultValue: new Date()
+			},
+			updatedAt: {
+				allowNull: false,
+				type: Sequelize.DATE,
+				defaultValue: new Date()
 			}
 		});
 	},

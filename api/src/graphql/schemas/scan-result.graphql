@@ -23,20 +23,6 @@ input ScanResultInput {
   finishedAt: Date!
 }
 
-input PositionsInput {
-  begin: PositionsBeginInput!
-}
-
-input FindingLocationInput {
-  path: String!
-  positions: PositionsInput!
-}
-
-input FindingMetadataInput {
-  description: String!
-  severity: String!
-}
-
 input FindingInput {
   type: String!
   ruleId: String!
@@ -47,10 +33,35 @@ input FindingInput {
   metaSeverity: ESeverity!
 }
 
+type LocationLine {
+  line: Int!
+}
+
+type Location {
+  path: String!
+  begin: LocationLine!
+  end: LocationLine
+}
+
+type Finding {
+  type: String!
+  ruleId: String!
+  location: Location!
+}
+
+type ScanResult {
+  repositoryName: String!
+  status: EStatus!
+  findings: [Finding!]!
+  queuedAt: Date!
+  scanningAt: Date!
+  finishedAt: Date!
+}
+
 type Mutation {
   inputNewScan(input: ScanResultInput!): Response
 }
 
 type Query {
-  getScans: String
+  getScans: [ScanResult!]
 }

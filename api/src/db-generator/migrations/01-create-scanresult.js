@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const tableName = "scan-result";
+const tableName = 'scan-result';
 
 module.exports = {
 	tableName,
@@ -14,27 +14,23 @@ module.exports = {
 			},
 			repositoryName: {
 				type: Sequelize.STRING,
-				allowNull: false,
+				allowNull: false
 			},
 			status: {
 				type: Sequelize.STRING,
-				allowNull: false,
-			},
-			findings: {
-				type: Sequelize.JSON,
-				allowNull: true,
+				allowNull: false
 			},
 			queuedAt: {
-				type: 'TIMESTAMP',
-				allowNull: false,
+				type: Sequelize.DATE,
+				allowNull: false
 			},
 			scanningAt: {
-				type: 'TIMESTAMP',
-				allowNull: false,
+				type: Sequelize.DATE,
+				allowNull: false
 			},
 			finishedAt: {
-				type: 'TIMESTAMP',
-				allowNull: false,
+				type: Sequelize.DATE,
+				allowNull: false
 			},
 			createdAt: {
 				allowNull: false,
