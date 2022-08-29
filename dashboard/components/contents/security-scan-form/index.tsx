@@ -220,10 +220,7 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ initValue }) => {
                       label="Queue Date"
                       value={getValues("queuedAt")}
                       onChange={(e) =>
-                        handleInputChange(
-                          "queuedAt",
-                          new Date(e.toString()).getTime()
-                        )
+                        handleInputChange("queuedAt", new Date(e.toString()))
                       }
                     />
                   )}
@@ -233,10 +230,7 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ initValue }) => {
                       label="Scanning Date"
                       value={getValues("scanningAt")}
                       onChange={(e) =>
-                        handleInputChange(
-                          "scanningAt",
-                          new Date(e.toString()).getTime()
-                        )
+                        handleInputChange("scanningAt", new Date(e.toString()))
                       }
                     />
                   )}
@@ -246,10 +240,7 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ initValue }) => {
                       label="Finished Date"
                       value={getValues("finishedAt")}
                       onChange={(e) =>
-                        handleInputChange(
-                          "finishedAt",
-                          new Date(e.toString()).getTime()
-                        )
+                        handleInputChange("finishedAt", new Date(e.toString()))
                       }
                     />
                   )}
