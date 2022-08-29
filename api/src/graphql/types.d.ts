@@ -111,8 +111,8 @@ export type IScanResult = {
   status: IEStatus;
   findings: Array<IFinding>;
   queuedAt: Scalars['Date'];
-  scanningAt: Maybe<Scalars['Date']>;
-  finishedAt: Maybe<Scalars['Date']>;
+  scanningAt?: Maybe<Scalars['Date']>;
+  finishedAt?: Maybe<Scalars['Date']>;
 };
 
 export type IScanResultInput = {
@@ -308,8 +308,8 @@ export type IScanResultResolvers<ContextType = any, ParentType extends IResolver
   status?: Resolver<IResolversTypes['EStatus'], ParentType, ContextType>;
   findings?: Resolver<Array<IResolversTypes['Finding']>, ParentType, ContextType>;
   queuedAt?: Resolver<IResolversTypes['Date'], ParentType, ContextType>;
-  scanningAt?: Resolver<IResolversTypes['Date'], ParentType, ContextType>;
-  finishedAt?: Resolver<IResolversTypes['Date'], ParentType, ContextType>;
+  scanningAt?: Resolver<Maybe<IResolversTypes['Date']>, ParentType, ContextType>;
+  finishedAt?: Resolver<Maybe<IResolversTypes['Date']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

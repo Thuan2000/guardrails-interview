@@ -9,11 +9,10 @@ interface IAllScansTableProps {
 }
 
 const AllScansTable: React.FC<IAllScansTableProps> = ({ scans }) => {
-  const [_, setIsRefresh] = useState(false);
   const [stateScans, setStateScans] = useState(scans || []);
 
   function handleDeletedScan(id: number) {
-    setStateScans(scans.filter((s) => s.id !== id));
+    setStateScans(stateScans.filter((s) => s.id !== id));
   }
 
   return (

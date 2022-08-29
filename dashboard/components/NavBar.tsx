@@ -82,12 +82,22 @@ function NavbarLink({ icon: Icon, label, active, onClick }: NavbarLinkProps) {
 
 const mockdata = [
   { icon: IconHome2, label: "Home", href: ROUTES.home },
-  { icon: IconForms, label: "Input Scan Result", href: ROUTES.scanInputFormPage },
+  {
+    icon: IconForms,
+    label: "Input Scan Result",
+    href: ROUTES.scanInputFormPage,
+  },
   { icon: IconList, label: "All Scan Results", href: ROUTES.allScansPage },
 ];
-
+function getActivePath(pathname: string) {
+  const path = pathname.split("/")[1];
+  return `/${path}` === ROUTES.selectedScansPage
+    ? ROUTES.allScansPage
+    : `/${path}`;
+}
 function getIsActive(href: string, pathname: string) {
-  return href === pathname;
+  const activePath = getActivePath(pathname);
+  return activePath === href;
 }
 
 export function NavbarMinimal() {

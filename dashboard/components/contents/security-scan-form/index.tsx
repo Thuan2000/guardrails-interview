@@ -62,6 +62,7 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ initValue }) => {
   const router = useRouter();
   const methods = useForm<ISecurityScanFormValue>({
     resolver: yupResolver(securityScanSchema),
+    defaultValues: generateScanFormDefaultValue(initValue),
   });
   const {
     handleSubmit,

@@ -57,7 +57,7 @@ export const securityScanSchema = yup.object({
       .required("Please input Scanning At")
       // .min(yup.ref("queuedAt"), "Finish time must be after queue time")
       .nullable(),
-  }),
+  }).nullable(),
   finishedAt: yup
     .string()
     .when("status", {
@@ -77,5 +77,5 @@ export const securityScanSchema = yup.object({
         // .min(yup.ref("queuedAt"), "Finish time must be after queue time")
         // .min(yup.ref("sacnningAt"), "Finish time must be after scanning time")
         .nullable(),
-    }),
+    }).nullable(),
 });
