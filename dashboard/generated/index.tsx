@@ -122,8 +122,8 @@ export type ScanResult = {
   status: EStatus;
   findings: Array<Finding>;
   queuedAt: Scalars['Date'];
-  scanningAt: Scalars['Date'];
-  finishedAt: Scalars['Date'];
+  scanningAt?: Maybe<Scalars['Date']>;
+  finishedAt?: Maybe<Scalars['Date']>;
 };
 
 export type ScanResultInput = {
@@ -131,8 +131,8 @@ export type ScanResultInput = {
   status: EStatus;
   findings: Array<Maybe<FindingInput>>;
   queuedAt: Scalars['Date'];
-  scanningAt: Scalars['Date'];
-  finishedAt: Scalars['Date'];
+  scanningAt?: Maybe<Scalars['Date']>;
+  finishedAt?: Maybe<Scalars['Date']>;
 };
 
 export type InputNewScanMutationVariables = Exact<{
