@@ -110,14 +110,14 @@ PORT=8080
 DB_DIALECT=mysql
 DB_PORT=3306
 DB_DATABASE=guardrails
-DB_HOST=db("db" is the container name of the database image) | localhost.
+DB_HOST=gr-db("gr-db" is the container name of the database image) | localhost.
 DB_USERNAME=root
 DB_PASSWORD=password
 ```
 * ```/dashboard```:
 ```
 NEXT_PUBLIC_API_GRAPHQL_ENDPOINT=http://localhost:8080/graphql (api is exposed to local machine by necessity because NextJS's client will call api directly).
-NEXT_PUBLIC_API_SSR_GRAPHQL_ENDPOINT=http://api:8080/graphql (used for NextJS's server-side functions, "api" is the container's name).
+NEXT_PUBLIC_API_SSR_GRAPHQL_ENDPOINT=http://gr-api:8080/graphql (used for NextJS's server-side functions, "api" is the container's name).
 ```
 
 
