@@ -118,6 +118,8 @@ DB_PASSWORD=password
 ```
 NEXT_PUBLIC_API_GRAPHQL_ENDPOINT=http://localhost:8080/graphql (api is exposed to local machine by necessity because NextJS's client will call api directly).
 NEXT_PUBLIC_API_SSR_GRAPHQL_ENDPOINT=http://api:8080/graphql (used for NextJS's server-side functions, "api" is the container's name).
+```
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
