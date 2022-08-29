@@ -111,8 +111,8 @@ export type IScanResult = {
   status: IEStatus;
   findings: Array<IFinding>;
   queuedAt: Scalars['Date'];
-  scanningAt: Scalars['Date'];
-  finishedAt: Scalars['Date'];
+  scanningAt: Maybe<Scalars['Date']>;
+  finishedAt: Maybe<Scalars['Date']>;
 };
 
 export type IScanResultInput = {

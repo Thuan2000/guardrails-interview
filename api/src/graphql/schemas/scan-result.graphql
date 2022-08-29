@@ -64,8 +64,8 @@ type ScanResult {
   status: EStatus!
   findings: [Finding!]!
   queuedAt: Date!
-  scanningAt: Date!
-  finishedAt: Date!
+  scanningAt: Date
+  finishedAt: Date
 }
 
 type Mutation {
