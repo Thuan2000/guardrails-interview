@@ -20,7 +20,7 @@ interface ISelectedScanEditPageProps {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { query } = ctx;
-  const apollo = generateApollo({}, ctx);
+  const apollo = generateApollo({}, ctx, true);
   const { data } = await apollo.query({
     query: getScanQuery,
     variables: { id: parseInt(query.id as string) },
