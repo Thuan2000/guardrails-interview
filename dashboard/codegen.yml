@@ -1,5 +1,5 @@
 overwrite: true
-schema: ${API_GRAPHQL_ENDPOINT}
+schema: ${NEXT_PUBLIC_API_GRAPHQL_ENDPOINT}
 documents: "graphql/*.ts"
 
 generates:

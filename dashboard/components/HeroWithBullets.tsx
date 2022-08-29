@@ -48,10 +48,10 @@ export function HeroBullets() {
                 <b>Input Security Scan Page</b> – Fill in the form to record/input a new scan result.
               </List.Item>
               <List.Item>
-                <b>View All Scans Page</b> – List all the scan results. Allows delete, update and select scan results.
+                <b>View All Scans Page</b> – List all the scan results. Allows delete, update and select a scan result.
               </List.Item>
               <List.Item>
-                <b>View Selected Scans Page</b> – List all the selected scan results. Allows unselecting the selected scan results.
+                <b>View Selected Scan Page</b> – List all the findings of a selected scan result.
               </List.Item>
             </List>
 

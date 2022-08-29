@@ -49,10 +49,13 @@ type FindingMetadata {
 }
 
 type Finding {
+  id: Int!
   type: String!
   ruleId: String!
   location: FindingLocation!
   metadata: FindingMetadata
+  scanningAt: Date
+  finishedAt: Date
 }
 
 type ScanResult {

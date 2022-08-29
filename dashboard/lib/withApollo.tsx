@@ -12,7 +12,7 @@ export const generateApollo = (initialState, headers) => {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: new HttpLink({
-      uri: "http://localhost:8080/graphql",
+      uri: process.env.NEXT_PUBLIC_API_GRAPHQL_ENDPOINT,
     }),
     headers: {
       ...(headers as Record<string, string>),
