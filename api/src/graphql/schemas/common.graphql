@@ -7,3 +7,9 @@ type Response {
   message: String!
   success: Boolean!
 }
+
+type DeleteResponse {
+  id: Int!
+  message: String!
+  success: Boolean!
+}

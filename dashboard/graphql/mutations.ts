@@ -8,3 +8,22 @@ export const Scan = gql`
     }
   }
 `;
+
+export const DeleteScan = gql`
+  mutation DeleteScan($id: Int!) {
+    deleteScan(id: $id) {
+      id
+      message
+      success
+    }
+  }
+`;
+
+export const UpdateScan = gql`
+  mutation UpdateScan($id: Int!, $input: ScanResultInput!) {
+    updateScan(id: $id, input: $input) {
+      message
+      success
+    }
+  }
+`;

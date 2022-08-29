@@ -14,7 +14,6 @@ import {
 } from "semantic-ui-react";
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import DatetimeInput from "@components/DatetimeInput";
 
 import {
   ScanResultInput,
@@ -22,6 +21,9 @@ import {
   InputNewScanMutation,
   FindingInput,
   EStatus,
+  ScanResult,
+  useUpdateScanMutation,
+  UpdateScanMutation,
 } from "../../../generated/index";
 import { fireSuccessSwalModal } from "functions/swal.function";
 import FindingsForm from "./FindingsForm";
@@ -29,17 +31,24 @@ import {
   ISecurityScanFormValue,
   securityScanSchema,
 } from "./SecurityScanFormSchema";
-import SemanticDatepicker from "react-semantic-ui-datepickers";
 import { toTitleCase } from "functions/util.function";
+import DatetimeInput from "@components/DatetimeInput";
+import { generateScanFormDefaultValue } from "./SecurityFindingFormFunctions";
+import { useRouter } from "next/router";
+import { ROUTES } from "@constants/routes.constant";
 
-interface ISecurityScanFormProps {}
+interface ISecurityScanFormProps {
+  initValue?: ScanResult;
+}
+
 
 const statusOptions: DropdownItemProps[] = Object.values(EStatus).map((s) => ({
   text: toTitleCase(s),
   value: s,
 }));
 
-const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ ...props }) => {
+const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ initValue }) => {
+  const router = useRouter();
   const methods = useForm<ISecurityScanFormValue>({
     resolver: yupResolver(securityScanSchema),
   });
@@ -56,7 +65,12 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ ...props }) => {
     register("repositoryName");
   }, []);
 
-  const [scan] = useInputNewScanMutation({ onCompleted: handleComplete });
+  const [scan, { loading: scanning }] = useInputNewScanMutation({
+    onCompleted: handleCreateComplete,
+  });
+  const [updateScan, { loading: updating }] = useUpdateScanMutation({
+    onCompleted: handleUpdateComplete,
+  });
 
   /**
    * Reset all field value
@@ -70,18 +84,31 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ ...props }) => {
     setValue("findings", []);
   }
 
+  async function handleUpdateComplete(resp: UpdateScanMutation) {
+    if (resp.updateScan.success) {
+      await fireSuccessSwalModal(
+        "Success Update Security Scan",
+        "Security scan updated successfully, and you can see it on security scan list page"
+      );
+
+      resetForm();
+      router.replace(ROUTES.allScansPage);
+    }
+  }
+
   /**
    * Handling if mutation is fired and is completed
    * @param resp From api
    */
-  async function handleComplete(resp: InputNewScanMutation) {
+  async function handleCreateComplete(resp: InputNewScanMutation) {
     if (resp.inputNewScan.success) {
-      fireSuccessSwalModal(
+      await fireSuccessSwalModal(
         "Success Add Security Scan",
         "Security scan added successfully, and you can see it on security scan list page"
       );
 
-      // resetForm();
+      resetForm();
+      router.replace(ROUTES.allScansPage);
     }
   }
 
@@ -113,11 +140,19 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ ...props }) => {
       scanningAt: new Date(value.scanningAt).getTime(),
     };
 
-    await scan({
-      variables: {
-        input,
-      },
-    });
+    if (!!initValue) {
+      updateScan({
+        variables: {
+          id: parseInt(initValue.id + ""),
+          input,
+        },
+      });
+    } else
+      scan({
+        variables: {
+          input,
+        },
+      });
   }
 
   /**
@@ -155,43 +190,43 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ ...props }) => {
               onChange={(_, { value }) => {
                 handleInputChange("status", value);
               }}
+              value={getValues("status") || ""}
               error={errors?.status?.message}
             />
             <FindingsForm />
             <div style={{ padding: "10px 0 10px 0" }}>
               <Grid>
-                <SemanticDatepicker
-                  showToday
-                  maxDate={new Date()}
-                  label={"Queue Date"}
-                  onChange={(e, { value }) => {
-                    handleInputChange(`queuedAt`, value);
-                  }}
+                <DatetimeInput
                   error={getError("queuedAt")}
+                  label="Queue Date"
+                  value={getValues("queuedAt") || new Date()}
+                  onChange={(e) =>
+                    handleInputChange("queuedAt", new Date(e.toString()))
+                  }
                 />
-                <SemanticDatepicker
-                  showToday
-                  maxDate={new Date()}
-                  label={"Scanning Date"}
-                  onChange={(e, { value }) => {
-                    handleInputChange(`scanningAt`, value);
-                  }}
+                <DatetimeInput
                   error={getError("scanningAt")}
+                  label="Scanning Date"
+                  value={getValues("queuedAt") || new Date()}
+                  onChange={(e) =>
+                    handleInputChange("scanningAt", new Date(e.toString()))
+                  }
                 />
-                <SemanticDatepicker
-                  showToday
-                  maxDate={new Date()}
-                  label={"Finished Date"}
-                  onChange={(e, { value }) => {
-                    handleInputChange(`finishedAt`, value);
-                  }}
+                <DatetimeInput
                   error={getError("finishedAt")}
+                  label="Finished Date"
+                  value={getValues("queuedAt") || new Date()}
+                  onChange={(e) =>
+                    handleInputChange("finishedAt", new Date(e.toString()))
+                  }
                 />
                 <DatetimeInput label="Queue Date" />
               </Grid>
             </div>
             <Divider />
-            <Button color="blue">Submit</Button>
+            <Button loading={scanning || updating} color="blue">
+              {!!initValue ? "Update" : "Submit"}
+            </Button>
           </Form>
         </FormProvider>
       </Segment>

@@ -28,6 +28,7 @@ const FindingForm: React.FC<IFindingFormProps> = ({ idx, onDeleteFinding }) => {
   const {
     register,
     setValue,
+    getValues,
     trigger,
     formState: { errors },
   } = useFormContext<ISecurityScanFormValue>();
@@ -51,6 +52,10 @@ const FindingForm: React.FC<IFindingFormProps> = ({ idx, onDeleteFinding }) => {
     return errors?.findings?.[idx]?.[key]?.message;
   }
 
+  function getValue(key) {
+    return getValues(`findings.${idx}.${key}` as any);
+  }
+
   return (
     <>
       <Header as="h5">Finding {idx + 1}</Header>
@@ -62,6 +67,7 @@ const FindingForm: React.FC<IFindingFormProps> = ({ idx, onDeleteFinding }) => {
           }
           label={"Type"}
           placeholder={"Type"}
+          value={getValue("type")}
           error={getError("type")}
         />
         <Form.Input
@@ -70,6 +76,7 @@ const FindingForm: React.FC<IFindingFormProps> = ({ idx, onDeleteFinding }) => {
           }
           label={"Rule"}
           placeholder={"Rule"}
+          value={getValue("ruleId")}
           error={getError("ruleId")}
         />
         <Form.Input
@@ -78,6 +85,7 @@ const FindingForm: React.FC<IFindingFormProps> = ({ idx, onDeleteFinding }) => {
           }
           label={"File Path"}
           placeholder={"File Path"}
+          value={getValue("path")}
           error={getError("path")}
         />
         <NumberInput
@@ -86,6 +94,7 @@ const FindingForm: React.FC<IFindingFormProps> = ({ idx, onDeleteFinding }) => {
           }
           label={"Severity Begin"}
           placeholder={"Severity Begin"}
+          value={getValue("begin")}
           error={getError("begin")}
         />
         <NumberInput
@@ -94,6 +103,7 @@ const FindingForm: React.FC<IFindingFormProps> = ({ idx, onDeleteFinding }) => {
           onValueChange={(e) => {
             handleInputChange(`findings.${idx}.end`, e.floatValue);
           }}
+          value={getValue("end")}
           error={getError("end")}
         />
         <Form.Input
@@ -101,6 +111,7 @@ const FindingForm: React.FC<IFindingFormProps> = ({ idx, onDeleteFinding }) => {
             handleInputChange(`findings.${idx}.description`, e.target.value)
           }
           label={"Description"}
+          value={getValue("description")}
           error={getError("description")}
         />
         <Form.Select
@@ -110,6 +121,7 @@ const FindingForm: React.FC<IFindingFormProps> = ({ idx, onDeleteFinding }) => {
           options={severityOptions}
           placeholder={"Severity Type"}
           label={"Severity Type"}
+          value={getValue("severityType")}
           error={getError("severityType")}
         />
         <Divider />

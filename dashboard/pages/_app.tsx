@@ -5,6 +5,7 @@
 
 import "../styles/globals.css";
 import "semantic-ui-css/semantic.min.css";
+import "react-datetime/css/react-datetime.css";
 
 import { getDataFromTree } from "@apollo/client/react/ssr";
 import { AppProps } from "next/app";

@@ -37,19 +37,26 @@ type LocationLine {
   line: Int!
 }
 
-type Location {
+type FindingLocation {
   path: String!
   begin: LocationLine!
   end: LocationLine
 }
 
+type FindingMetadata {
+  description: String!
+  severity: ESeverity!
+}
+
 type Finding {
   type: String!
   ruleId: String!
-  location: Location!
+  location: FindingLocation!
+  metadata: FindingMetadata
 }
 
 type ScanResult {
+  id: Int!
   repositoryName: String!
   status: EStatus!
   findings: [Finding!]!
@@ -60,8 +67,11 @@ type ScanResult {
 
 type Mutation {
   inputNewScan(input: ScanResultInput!): Response
+  deleteScan(id: Int!): DeleteResponse!
+  updateScan(id: Int!, input: ScanResultInput!): Response!
 }
 
 type Query {
   getScans: [ScanResult!]
+  getScan(id: Int): ScanResult
 }

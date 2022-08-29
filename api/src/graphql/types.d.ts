@@ -16,9 +16,15 @@ export type Scalars = {
 };
 
 
+export type IDeleteResponse = {
+  id: Scalars['Int'];
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
+};
+
 export type IESeverity =
-  | 'HIGH'
   | 'LOW'
+  | 'HIGH'
   | 'MODERATE';
 
 export type IEStatus =
@@ -30,7 +36,8 @@ export type IEStatus =
 export type IFinding = {
   type: Scalars['String'];
   ruleId: Scalars['String'];
-  location: ILocation;
+  location: IFindingLocation;
+  metadata?: Maybe<IFindingMetadata>;
 };
 
 export type IFindingInput = {
@@ -43,10 +50,15 @@ export type IFindingInput = {
   metaSeverity: IESeverity;
 };
 
-export type ILocation = {
+export type IFindingLocation = {
   path: Scalars['String'];
   begin: ILocationLine;
   end?: Maybe<ILocationLine>;
+};
+
+export type IFindingMetadata = {
+  description: Scalars['String'];
+  severity: IESeverity;
 };
 
 export type ILocationLine = {
@@ -55,6 +67,7 @@ export type ILocationLine = {
 
 export type IMutation = {
   inputNewScan?: Maybe<IResponse>;
+  deleteScan: IDeleteResponse;
 };
 
 
@@ -62,8 +75,19 @@ export type IMutationInputNewScanArgs = {
   input: IScanResultInput;
 };
 
+
+export type IMutationDeleteScanArgs = {
+  id: Scalars['Int'];
+};
+
 export type IQuery = {
   getScans?: Maybe<Array<IScanResult>>;
+  getScan?: Maybe<IScanResult>;
+};
+
+
+export type IQueryGetScanArgs = {
+  id?: Maybe<Scalars['Int']>;
 };
 
 export type IResponse = {
@@ -72,6 +96,7 @@ export type IResponse = {
 };
 
 export type IScanResult = {
+  id: Scalars['Int'];
   repositoryName: Scalars['String'];
   status: IEStatus;
   findings: Array<IFinding>;
@@ -174,53 +199,71 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type IResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   ScanResult: ResolverTypeWrapper<IScanResult>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   String: ResolverTypeWrapper<Scalars['String']>;
   EStatus: IEStatus;
   Finding: ResolverTypeWrapper<IFinding>;
-  Location: ResolverTypeWrapper<ILocation>;
+  FindingLocation: ResolverTypeWrapper<IFindingLocation>;
   LocationLine: ResolverTypeWrapper<ILocationLine>;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
+  FindingMetadata: ResolverTypeWrapper<IFindingMetadata>;
+  ESeverity: IESeverity;
   Date: ResolverTypeWrapper<Scalars['Date']>;
   Mutation: ResolverTypeWrapper<{}>;
   ScanResultInput: IScanResultInput;
   FindingInput: IFindingInput;
-  ESeverity: IESeverity;
   Response: ResolverTypeWrapper<IResponse>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  DeleteResponse: ResolverTypeWrapper<IDeleteResponse>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type IResolversParentTypes = {
   Query: {};
   ScanResult: IScanResult;
+  Int: Scalars['Int'];
   String: Scalars['String'];
   Finding: IFinding;
-  Location: ILocation;
+  FindingLocation: IFindingLocation;
   LocationLine: ILocationLine;
-  Int: Scalars['Int'];
+  FindingMetadata: IFindingMetadata;
   Date: Scalars['Date'];
   Mutation: {};
   ScanResultInput: IScanResultInput;
   FindingInput: IFindingInput;
   Response: IResponse;
   Boolean: Scalars['Boolean'];
+  DeleteResponse: IDeleteResponse;
 };
 
 export interface IDateScalarConfig extends GraphQLScalarTypeConfig<IResolversTypes['Date'], any> {
   name: 'Date';
 }
 
-export type IFindingResolvers<ContextType = any, ParentType extends IResolversParentTypes['Finding'] = IResolversParentTypes['Finding']> = {
-  type?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
-  ruleId?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
-  location?: Resolver<IResolversTypes['Location'], ParentType, ContextType>;
+export type IDeleteResponseResolvers<ContextType = any, ParentType extends IResolversParentTypes['DeleteResponse'] = IResolversParentTypes['DeleteResponse']> = {
+  id?: Resolver<IResolversTypes['Int'], ParentType, ContextType>;
+  message?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
+  success?: Resolver<IResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ILocationResolvers<ContextType = any, ParentType extends IResolversParentTypes['Location'] = IResolversParentTypes['Location']> = {
+export type IFindingResolvers<ContextType = any, ParentType extends IResolversParentTypes['Finding'] = IResolversParentTypes['Finding']> = {
+  type?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
+  ruleId?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
+  location?: Resolver<IResolversTypes['FindingLocation'], ParentType, ContextType>;
+  metadata?: Resolver<Maybe<IResolversTypes['FindingMetadata']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type IFindingLocationResolvers<ContextType = any, ParentType extends IResolversParentTypes['FindingLocation'] = IResolversParentTypes['FindingLocation']> = {
   path?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
   begin?: Resolver<IResolversTypes['LocationLine'], ParentType, ContextType>;
   end?: Resolver<Maybe<IResolversTypes['LocationLine']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type IFindingMetadataResolvers<ContextType = any, ParentType extends IResolversParentTypes['FindingMetadata'] = IResolversParentTypes['FindingMetadata']> = {
+  description?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
+  severity?: Resolver<IResolversTypes['ESeverity'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -231,10 +274,12 @@ export type ILocationLineResolvers<ContextType = any, ParentType extends IResolv
 
 export type IMutationResolvers<ContextType = any, ParentType extends IResolversParentTypes['Mutation'] = IResolversParentTypes['Mutation']> = {
   inputNewScan?: Resolver<Maybe<IResolversTypes['Response']>, ParentType, ContextType, RequireFields<IMutationInputNewScanArgs, 'input'>>;
+  deleteScan?: Resolver<IResolversTypes['DeleteResponse'], ParentType, ContextType, RequireFields<IMutationDeleteScanArgs, 'id'>>;
 };
 
 export type IQueryResolvers<ContextType = any, ParentType extends IResolversParentTypes['Query'] = IResolversParentTypes['Query']> = {
   getScans?: Resolver<Maybe<Array<IResolversTypes['ScanResult']>>, ParentType, ContextType>;
+  getScan?: Resolver<Maybe<IResolversTypes['ScanResult']>, ParentType, ContextType, RequireFields<IQueryGetScanArgs, never>>;
 };
 
 export type IResponseResolvers<ContextType = any, ParentType extends IResolversParentTypes['Response'] = IResolversParentTypes['Response']> = {
@@ -244,6 +289,7 @@ export type IResponseResolvers<ContextType = any, ParentType extends IResolversP
 };
 
 export type IScanResultResolvers<ContextType = any, ParentType extends IResolversParentTypes['ScanResult'] = IResolversParentTypes['ScanResult']> = {
+  id?: Resolver<IResolversTypes['Int'], ParentType, ContextType>;
   repositoryName?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
   status?: Resolver<IResolversTypes['EStatus'], ParentType, ContextType>;
   findings?: Resolver<Array<IResolversTypes['Finding']>, ParentType, ContextType>;
@@ -255,8 +301,10 @@ export type IScanResultResolvers<ContextType = any, ParentType extends IResolver
 
 export type IResolvers<ContextType = any> = {
   Date?: GraphQLScalarType;
+  DeleteResponse?: IDeleteResponseResolvers<ContextType>;
   Finding?: IFindingResolvers<ContextType>;
-  Location?: ILocationResolvers<ContextType>;
+  FindingLocation?: IFindingLocationResolvers<ContextType>;
+  FindingMetadata?: IFindingMetadataResolvers<ContextType>;
   LocationLine?: ILocationLineResolvers<ContextType>;
   Mutation?: IMutationResolvers<ContextType>;
   Query?: IQueryResolvers<ContextType>;

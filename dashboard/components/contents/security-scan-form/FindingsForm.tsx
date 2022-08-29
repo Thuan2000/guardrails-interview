@@ -1,4 +1,5 @@
 import { IconPlus } from "@tabler/icons";
+import { fireDeleteConfirmationModal } from "functions/swal.function";
 import React from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Button, Divider, Header, Segment } from "semantic-ui-react";
@@ -35,14 +36,10 @@ const FindingsForm: React.FC<IFindingsFormProps> = ({ ...props }) => {
   }
 
   async function handleDeleteFinding(idx: number) {
-    const { isConfirmed } = await Swal.fire({
-      title: "Delete Finding?",
-      text: "Are you sure want to delete finding?",
-      confirmButtonColor: "blue",
-      confirmButtonText: "Delete",
-      cancelButtonText: "Cancel",
-      showCancelButton: true,
-    });
+    const { isConfirmed } = await fireDeleteConfirmationModal(
+      "Delete Finding?",
+      "Are you sure want to delete finding?"
+    );
 
     if (isConfirmed) remove(idx);
   }

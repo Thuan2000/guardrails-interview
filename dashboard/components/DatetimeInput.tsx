@@ -1,16 +1,28 @@
 import React from "react";
-import { Form } from "semantic-ui-react";
+import { Form, Label } from "semantic-ui-react";
+import Datetime, { DatetimepickerProps } from "react-datetime";
 
-interface IDatetimeInputProps extends React.HTMLAttributes<HTMLInputElement> {
+interface IDatetimeInputProps extends DatetimepickerProps {
   label?: string;
+  error?: string;
 }
 
-const DatetimeInput: React.FC<IDatetimeInputProps> = ({ label, ...props }) => {
+const DatetimeInput: React.FC<IDatetimeInputProps> = ({
+  label,
+  error,
+  ...props
+}) => {
   return (
-    <Form.Field>
+    <Form.Field error={error}>
       {!!label && <label>{label}</label>}
 
-      <input type="datetime" {...props} />
+      <Datetime inputProps={{ placeholder: "28/08/2022 12:00PM" }} {...props} />
+
+      {!!error && (
+        <Label prompt pointing="above">
+          {error}
+        </Label>
+      )}
     </Form.Field>
   );
 };
