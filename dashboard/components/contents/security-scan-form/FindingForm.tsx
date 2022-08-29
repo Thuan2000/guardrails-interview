@@ -92,14 +92,14 @@ const FindingForm: React.FC<IFindingFormProps> = ({ idx, onDeleteFinding }) => {
           onValueChange={(e) =>
             handleInputChange(`findings.${idx}.begin`, e.floatValue)
           }
-          label={"Severity Begin"}
-          placeholder={"Severity Begin"}
+          label={"Line Begin"}
+          placeholder={"Line Begin"}
           value={getValue("begin")}
           error={getError("begin")}
         />
         <NumberInput
-          label={"Severity End"}
-          placeholder={"Severity End"}
+          label={"Line End"}
+          placeholder={"Line End"}
           onValueChange={(e) => {
             handleInputChange(`findings.${idx}.end`, e.floatValue);
           }}

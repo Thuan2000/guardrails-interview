@@ -16,7 +16,7 @@ const ScanInputFormPage: React.FC<IScanInputFormPageProps> = () => {
   return (
     <Container>
       <Header textAlign="center" as="h3">
-        Add Your Security Scan By Filling This Form
+        Add Your Security Scan Result By Filling This Form
       </Header>
       <SecurityScanForm />
     </Container>

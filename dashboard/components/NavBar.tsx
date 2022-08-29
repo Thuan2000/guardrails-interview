@@ -84,7 +84,6 @@ const mockdata = [
   { icon: IconHome2, label: "Home", href: ROUTES.home },
   { icon: IconForms, label: "Input Scan Result", href: ROUTES.scanInputFormPage },
   { icon: IconList, label: "All Scan Results", href: ROUTES.allScansPage },
-  { icon: IconListCheck, label: "Selected Scan Results", href: ROUTES.selectedScansPage },
 ];
 
 function getIsActive(href: string, pathname: string) {

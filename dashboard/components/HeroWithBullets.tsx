@@ -31,7 +31,7 @@ export function HeroBullets() {
             </Title>
             <Text color="dimmed" mt="md">
               My name is Thuan Nguyen located in Vietnam. I live to build great products. <br /><br />
-              There are three pages in this application, accessible via the left navigation bar, respectively:
+              There are three pages in this application, two of which are accessible via the left navigation bar, respectively:
             </Text>
 
             <List
@@ -51,7 +51,7 @@ export function HeroBullets() {
                 <b>View All Scans Page</b> – List all the scan results. Allows delete, update and select a scan result.
               </List.Item>
               <List.Item>
-                <b>View Selected Scan Page</b> – List all the findings of a selected scan result.
+                <b>View Selected Scan Page</b> – Click on one of the scans in the "All Scans Page" to access this page.
               </List.Item>
             </List>
 
