@@ -13,7 +13,7 @@ import { TReactComponentWithLayout } from "constants/common-types";
 import { getScansQuery } from "@graphql/queries";
 import { generateApollo } from "@lib/withApollo";
 import { EStatus, ScanResult } from "@generated/index";
-import { Table } from "semantic-ui-react";
+import { Icon, Label, Table } from "semantic-ui-react";
 
 interface IAllScansPageProps {
   scans: ScanResult[];
@@ -60,7 +60,11 @@ const AllScansPage: React.FC<IAllScansPageProps> = ({ scans }) => {
             <Table.Row>
               <Table.Cell>{s.repositoryName}</Table.Cell>
               <Table.Cell>{s.status}</Table.Cell>
-              <Table.Cell>{s.findings.length}</Table.Cell>
+              <Table.Cell>
+                <Label color="yellow">
+                  <Icon name="warning sign" /> {s.findings.length}
+                </Label>
+              </Table.Cell>
               <Table.Cell>{getTimestampLabel(s)}</Table.Cell>
             </Table.Row>
           );

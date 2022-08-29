@@ -3,9 +3,7 @@ import { IconTrash } from "@tabler/icons";
 import { toTitleCase } from "functions/util.function";
 import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import SemanticDatepicker from "react-semantic-ui-datepickers";
 import {
-  Grid,
   Segment,
   Form,
   DropdownItemProps,
@@ -14,6 +12,8 @@ import {
   Divider,
 } from "semantic-ui-react";
 import { ISecurityScanFormValue } from "./SecurityScanFormSchema";
+import NumberFormat from "react-number-format";
+import NumberInput from "@components/NumberInput";
 
 interface IFindingFormProps {
   idx: number;
@@ -61,6 +61,7 @@ const FindingForm: React.FC<IFindingFormProps> = ({ idx, onDeleteFinding }) => {
             handleInputChange(`findings.${idx}.type`, e.target.value)
           }
           label={"Type"}
+          placeholder={"Type"}
           error={getError("type")}
         />
         <Form.Input
@@ -68,6 +69,7 @@ const FindingForm: React.FC<IFindingFormProps> = ({ idx, onDeleteFinding }) => {
             handleInputChange(`findings.${idx}.ruleId`, e.target.value)
           }
           label={"Rule"}
+          placeholder={"Rule"}
           error={getError("ruleId")}
         />
         <Form.Input
@@ -75,20 +77,23 @@ const FindingForm: React.FC<IFindingFormProps> = ({ idx, onDeleteFinding }) => {
             handleInputChange(`findings.${idx}.path`, e.target.value)
           }
           label={"File Path"}
+          placeholder={"File Path"}
           error={getError("path")}
         />
-        <Form.Input
-          onChange={(e) =>
-            handleInputChange(`findings.${idx}.begin`, e.target.value)
+        <NumberInput
+          onValueChange={(e) =>
+            handleInputChange(`findings.${idx}.begin`, e.floatValue)
           }
           label={"Severity Begin"}
+          placeholder={"Severity Begin"}
           error={getError("begin")}
         />
-        <Form.Input
-          onChange={(e) =>
-            handleInputChange(`findings.${idx}.end`, e.target.value)
-          }
+        <NumberInput
           label={"Severity End"}
+          placeholder={"Severity End"}
+          onValueChange={(e) => {
+            handleInputChange(`findings.${idx}.end`, e.floatValue);
+          }}
           error={getError("end")}
         />
         <Form.Input
@@ -103,6 +108,7 @@ const FindingForm: React.FC<IFindingFormProps> = ({ idx, onDeleteFinding }) => {
             handleInputChange(`findings.${idx}.severityType`, value);
           }}
           options={severityOptions}
+          placeholder={"Severity Type"}
           label={"Severity Type"}
           error={getError("severityType")}
         />

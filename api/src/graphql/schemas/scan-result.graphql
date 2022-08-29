@@ -9,8 +9,8 @@ enum EStatus {
 }
 
 enum ESeverity {
-  HIGH
   LOW
+  HIGH
   MODERATE
 }
 

@@ -14,6 +14,7 @@ import {
 } from "semantic-ui-react";
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import DatetimeInput from "@components/DatetimeInput";
 
 import {
   ScanResultInput,
@@ -149,6 +150,7 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ ...props }) => {
             />
             <Form.Select
               label="Status"
+              placeholder="Status"
               options={statusOptions}
               onChange={(_, { value }) => {
                 handleInputChange("status", value);
@@ -185,6 +187,7 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ ...props }) => {
                   }}
                   error={getError("finishedAt")}
                 />
+                <DatetimeInput label="Queue Date" />
               </Grid>
             </div>
             <Divider />
