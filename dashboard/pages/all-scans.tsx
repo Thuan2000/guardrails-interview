@@ -16,10 +16,10 @@ import { ScanResult } from "@generated/index";
 import AllScansTable from "@components/contents/all-scans/AllScansTable";
 
 interface IAllScansPageProps {
-  scans: ScanResult[];
+  scans: ScanResult[] | null;
 }
 
-const AllScansPage: React.FC<IAllScansPageProps> = ({ scans }) => {
+const AllScansPage: React.FC<IAllScansPageProps> = ({ scans = []}) => {
   return (
     <>
       <AllScansTable scans={scans} />
@@ -28,7 +28,7 @@ const AllScansPage: React.FC<IAllScansPageProps> = ({ scans }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const apollo = generateApollo({}, ctx);
+  const apollo = generateApollo({}, ctx, true);
   const { data } = await apollo.query({
     query: getScansQuery,
   });

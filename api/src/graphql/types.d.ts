@@ -39,6 +39,8 @@ export type IFinding = {
   ruleId: Scalars['String'];
   location: IFindingLocation;
   metadata?: Maybe<IFindingMetadata>;
+  scanningAt?: Maybe<Scalars['Date']>;
+  finishedAt?: Maybe<Scalars['Date']>;
 };
 
 export type IFindingInput = {
@@ -109,8 +111,8 @@ export type IScanResult = {
   status: IEStatus;
   findings: Array<IFinding>;
   queuedAt: Scalars['Date'];
-  scanningAt?: Maybe<Scalars['Date']>;
-  finishedAt?: Maybe<Scalars['Date']>;
+  scanningAt: Scalars['Date'];
+  finishedAt: Scalars['Date'];
 };
 
 export type IScanResultInput = {
@@ -260,6 +262,8 @@ export type IFindingResolvers<ContextType = any, ParentType extends IResolversPa
   ruleId?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
   location?: Resolver<IResolversTypes['FindingLocation'], ParentType, ContextType>;
   metadata?: Resolver<Maybe<IResolversTypes['FindingMetadata']>, ParentType, ContextType>;
+  scanningAt?: Resolver<Maybe<IResolversTypes['Date']>, ParentType, ContextType>;
+  finishedAt?: Resolver<Maybe<IResolversTypes['Date']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -304,8 +308,8 @@ export type IScanResultResolvers<ContextType = any, ParentType extends IResolver
   status?: Resolver<IResolversTypes['EStatus'], ParentType, ContextType>;
   findings?: Resolver<Array<IResolversTypes['Finding']>, ParentType, ContextType>;
   queuedAt?: Resolver<IResolversTypes['Date'], ParentType, ContextType>;
-  scanningAt?: Resolver<Maybe<IResolversTypes['Date']>, ParentType, ContextType>;
-  finishedAt?: Resolver<Maybe<IResolversTypes['Date']>, ParentType, ContextType>;
+  scanningAt?: Resolver<IResolversTypes['Date'], ParentType, ContextType>;
+  finishedAt?: Resolver<IResolversTypes['Date'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -321,4 +325,5 @@ export type IResolvers<ContextType = any> = {
   Response?: IResponseResolvers<ContextType>;
   ScanResult?: IScanResultResolvers<ContextType>;
 };
+
 

@@ -12,18 +12,13 @@ import {
 } from "functions/swal.function";
 import { getTimestampLabel, getTimestampValue } from "functions/util.function";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { Button, Icon, Label, Table } from "semantic-ui-react";
 
 interface IScanRowProps {
   scan: ScanResult;
   onDeletedScan: (id: number) => void;
-}
-
-function getTimestampLabel(scanResult: ScanResult) {
-  const label = timeLabel[scanResult.status];
-  const date = scanResult[getKey(scanResult.status)];
-  return `${label} : ${getFormattedDatetime(date)} (${getAgoTime(date)} ago)`;
 }
 
 const ScanRow: React.FC<IScanRowProps> = ({ scan, onDeletedScan }) => {

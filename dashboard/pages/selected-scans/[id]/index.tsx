@@ -135,3 +135,5 @@ const SelectedScansPage: React.FC<ISelectedScansPageProps> = ({ scan }) => {
 };
 
 (SelectedScansPage as TReactComponentWithLayout).Layout = PageLayout;
+
+export default SelectedScansPage;

@@ -8,11 +8,11 @@ import {
 import { useRouter } from "next/router";
 import nextWithApollo from "next-with-apollo";
 
-export const generateApollo = (initialState, headers) => {
+export const generateApollo = (initialState, headers, ssrMode: boolean = false) => {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: new HttpLink({
-      uri: process.env.NEXT_PUBLIC_API_GRAPHQL_ENDPOINT,
+      uri: ssrMode ? process.env.NEXT_PUBLIC_API_SSR_GRAPHQL_ENDPOINT : process.env.NEXT_PUBLIC_API_GRAPHQL_ENDPOINT,
     }),
     headers: {
       ...(headers as Record<string, string>),

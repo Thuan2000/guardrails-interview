@@ -59,11 +59,12 @@ Before you are able to run the project, make sure you have installed these depen
 <a name="running-using-docker"/>
 
 ## I. Running using Docker:
-1. At the root folder, run:
+1. Make sure the .env files are set correctly in ```/api``` and ```/dashboard``` <a href="#environment-variables">View "Environment Variables"</a>
+2. At the root folder, run:
    ```sh
    docker-compose up
    ```
-2. Navigate to dashboard: [http://localhost:3000](http://localhost:3000)
+3. Navigate to dashboard: [http://localhost:3000](http://localhost:3000)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -74,13 +75,19 @@ Before you are able to run the project, make sure you have installed these depen
 <a name="development-mode"/>
 
 ### a. Development mode:
-TODO: Add more contents
+
+1. Make sure you have a running MySQL instance locally (or on the cloud).
+2. Make sure the .env files are set correctly in ```/api``` and ```/dashboard``` <a href="#environment-variables">View "Environment Variables"</a>
+3. In ```/api``` run these commands: ```yarn && yarn db:migrate && yarn dev```.
+4. In ```/dashboard``` run ```yarn && yarn dev```. (Note: only run this after step #3).
 
 <a name="built-mode"/>
 
 ### b. Built mode:
 
-TODO: Add more contents
+1. Do step #1 and step #2 in "Development Mode" guide above.
+2. In ```/api``` run these commands: ```yarn && yarn db:migrate && yarn start```.
+3. In ```/dashboard``` run ```yarn && yarn build && yarn start```. (Note: only run this after step #3).
 
 
 <!-- USAGE EXAMPLES -->
@@ -95,7 +102,23 @@ TODO: Add more contents
 <a name="environment-variables"/>
 
 ## Environment Variables:
-TODO: Add more contents.
+There are 2 ```.env.example``` files respectively in ```/api``` and ```/dashboard``` folders. Copy them respectively to ```.env``` and change the values accordingly. It is recommended that you use these values by default if you're going to run ```docker-compose up``` in root folder:
+* ```/api```:
+```
+NODE_ENV=development | production
+PORT=8080
+DB_DIALECT=mysql
+DB_PORT=3306
+DB_DATABASE=guardrails
+DB_HOST=db("db" is the container name of the database image) | localhost.
+DB_USERNAME=root
+DB_PASSWORD=password
+```
+* ```/dashboard```:
+```
+NEXT_PUBLIC_API_GRAPHQL_ENDPOINT=http://localhost:8080/graphql (api is exposed to local machine by necessity because NextJS's client will call api directly).
+NEXT_PUBLIC_API_SSR_GRAPHQL_ENDPOINT=http://api:8080/graphql (used for NextJS's server-side functions, "api" is the container's name).
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
