@@ -1,6 +1,6 @@
 <div align="center">
   <a name="readme-top"/>
-  <h1 align="center">GuardRails Fullstack Challenge</h1>
+  <h1 align="center">GuardRails Fullstack Challenge <a target="_blank" href="https://thuan-public-test-2.s3.ap-southeast-1.amazonaws.com/guardrails-interview.mp4">Demo Video</a>.</h1>
   <p align="center">
     Thuan Nguyen, Vietnam. (Challenge period: 22<sup>nd</sup>Aug to 29<sup>th</sup>Aug, 2022).
     <br />
