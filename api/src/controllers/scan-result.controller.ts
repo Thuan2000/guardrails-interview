@@ -59,7 +59,7 @@ class ScanResultController {
       return successResponse(`Succesfully add scan ${scanResultId}`);
     } catch (error) {
       console.error(error);
-      return errorResponse(error)
+      return errorResponse(error as string)
     }
   }
 
@@ -84,7 +84,7 @@ class ScanResultController {
 
     } catch (error) {
       console.error(error)
-      return errorResponse(error)
+      return errorResponse(error as string)
     }
 
   }
@@ -107,7 +107,7 @@ class ScanResultController {
       return successResponse(`Success delete scan result with id ${id}`)
     } catch (error) {
       console.error(error)
-      return errorResponse(error)
+      return errorResponse(error as string)
     }
   }
 }

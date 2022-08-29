@@ -34,13 +34,13 @@ const FindingForm: React.FC<IFindingFormProps> = ({ idx, onDeleteFinding }) => {
   } = useFormContext<ISecurityScanFormValue>();
 
   useEffect(() => {
-    register(`findings.${idx}.type`);
-    register(`findings.${idx}.ruleId`);
-    register(`findings.${idx}.path`);
-    register(`findings.${idx}.begin`);
-    register(`findings.${idx}.end`);
-    register(`findings.${idx}.description`);
-    register(`findings.${idx}.severityType`);
+    register(`findings.${idx}.type` as `findings.${number}.type`);
+    register(`findings.${idx}.ruleId` as `findings.${number}.type`);
+    register(`findings.${idx}.path` as `findings.${number}.type`);
+    register(`findings.${idx}.begin` as `findings.${number}.type`);
+    register(`findings.${idx}.end` as `findings.${number}.type`);
+    register(`findings.${idx}.description` as `findings.${number}.type`);
+    register(`findings.${idx}.severityType` as `findings.${number}.type`);
   }, []);
 
   function handleInputChange(key, value) {

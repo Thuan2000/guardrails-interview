@@ -12,7 +12,7 @@ RUN yarn build
 FROM node:lts as runner
 WORKDIR /dashboard
 ENV NODE_ENV production
-# If you are using a custom next.config.js file, uncomment this line.
+
 COPY --from=builder /dashboard/next.config.js ./
 COPY --from=builder /dashboard/public ./public
 COPY --from=builder /dashboard/.next ./.next

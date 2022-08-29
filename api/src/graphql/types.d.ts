@@ -68,6 +68,7 @@ export type ILocationLine = {
 export type IMutation = {
   inputNewScan?: Maybe<IResponse>;
   deleteScan: IDeleteResponse;
+  updateScan: IResponse;
 };
 
 
@@ -78,6 +79,12 @@ export type IMutationInputNewScanArgs = {
 
 export type IMutationDeleteScanArgs = {
   id: Scalars['Int'];
+};
+
+
+export type IMutationUpdateScanArgs = {
+  id: Scalars['Int'];
+  input: IScanResultInput;
 };
 
 export type IQuery = {
@@ -275,6 +282,7 @@ export type ILocationLineResolvers<ContextType = any, ParentType extends IResolv
 export type IMutationResolvers<ContextType = any, ParentType extends IResolversParentTypes['Mutation'] = IResolversParentTypes['Mutation']> = {
   inputNewScan?: Resolver<Maybe<IResolversTypes['Response']>, ParentType, ContextType, RequireFields<IMutationInputNewScanArgs, 'input'>>;
   deleteScan?: Resolver<IResolversTypes['DeleteResponse'], ParentType, ContextType, RequireFields<IMutationDeleteScanArgs, 'id'>>;
+  updateScan?: Resolver<IResolversTypes['Response'], ParentType, ContextType, RequireFields<IMutationUpdateScanArgs, 'id' | 'input'>>;
 };
 
 export type IQueryResolvers<ContextType = any, ParentType extends IResolversParentTypes['Query'] = IResolversParentTypes['Query']> = {
