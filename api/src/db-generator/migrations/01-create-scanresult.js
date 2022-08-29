@@ -26,11 +26,11 @@ module.exports = {
 			},
 			scanningAt: {
 				type: Sequelize.DATE,
-				allowNull: false
+				allowNull: true
 			},
 			finishedAt: {
 				type: Sequelize.DATE,
-				allowNull: false
+				allowNull: true
 			},
 			createdAt: {
 				allowNull: false,

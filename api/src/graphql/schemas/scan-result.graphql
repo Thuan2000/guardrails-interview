@@ -19,8 +19,8 @@ input ScanResultInput {
   status: EStatus!
   findings: [FindingInput]!
   queuedAt: Date!
-  scanningAt: Date!
-  finishedAt: Date!
+  scanningAt: Date
+  finishedAt: Date
 }
 
 input FindingInput {

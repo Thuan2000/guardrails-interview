@@ -40,6 +40,7 @@ export enum EStatus {
 
 export type Finding = {
   __typename?: 'Finding';
+  id: Scalars['Int'];
   type: Scalars['String'];
   ruleId: Scalars['String'];
   location: FindingLocation;
@@ -184,7 +185,7 @@ export type GetScansQuery = (
     & Pick<ScanResult, 'id' | 'status' | 'repositoryName' | 'queuedAt' | 'scanningAt' | 'finishedAt'>
     & { findings: Array<(
       { __typename?: 'Finding' }
-      & Pick<Finding, 'ruleId' | 'type'>
+      & Pick<Finding, 'id' | 'ruleId' | 'type'>
       & { location: (
         { __typename?: 'FindingLocation' }
         & Pick<FindingLocation, 'path'>
@@ -209,7 +210,7 @@ export type GetScanQuery = (
     & Pick<ScanResult, 'id' | 'status' | 'repositoryName' | 'queuedAt' | 'scanningAt' | 'finishedAt'>
     & { findings: Array<(
       { __typename?: 'Finding' }
-      & Pick<Finding, 'ruleId' | 'type'>
+      & Pick<Finding, 'id' | 'ruleId' | 'type'>
       & { location: (
         { __typename?: 'FindingLocation' }
         & Pick<FindingLocation, 'path'>
@@ -343,6 +344,7 @@ export const GetScansDocument = gql`
     scanningAt
     finishedAt
     findings {
+      id
       location {
         path
         begin {
@@ -392,6 +394,7 @@ export const GetScanDocument = gql`
     scanningAt
     finishedAt
     findings {
+      id
       ruleId
       type
       location {

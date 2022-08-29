@@ -37,6 +37,7 @@ export const securityScanSchema = yup.object({
           .nullable(),
         end: yup
           .number()
+          .min(yup.ref("begin"), "End line must be larger than begin line")
           .required("Please fill End input")
           .typeError("End value must be a number")
           .nullable(),
@@ -49,6 +50,32 @@ export const securityScanSchema = yup.object({
     )
     .min(1, "Please add finding"),
   queuedAt: yup.string().required("Please input Queued At").nullable(),
-  scanningAt: yup.string().required("Please input Scanning At").nullable(),
-  finishedAt: yup.string().required("Please input Finished At").nullable(),
+  scanningAt: yup.string().when("status", {
+    is: EStatus.InProgress,
+    then: yup
+      .string()
+      .required("Please input Scanning At")
+      // .min(yup.ref("queuedAt"), "Finish time must be after queue time")
+      .nullable(),
+  }),
+  finishedAt: yup
+    .string()
+    .when("status", {
+      is: EStatus.Success,
+      then: yup
+        .string()
+        .required("Please input Finished At")
+        // .min(yup.ref("queuedAt"), "Finish time must be after queue time")
+        // .min(yup.ref("sacnningAt"), "Finish time must be after scanning time")
+        .nullable(),
+    })
+    .when("status", {
+      is: EStatus.Failure,
+      then: yup
+        .string()
+        .required("Please input Finished At")
+        // .min(yup.ref("queuedAt"), "Finish time must be after queue time")
+        // .min(yup.ref("sacnningAt"), "Finish time must be after scanning time")
+        .nullable(),
+    }),
 });

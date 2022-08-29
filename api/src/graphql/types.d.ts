@@ -34,6 +34,7 @@ export type IEStatus =
   | 'Failure';
 
 export type IFinding = {
+  id: Scalars['Int'];
   type: Scalars['String'];
   ruleId: Scalars['String'];
   location: IFindingLocation;
@@ -117,8 +118,8 @@ export type IScanResultInput = {
   status: IEStatus;
   findings: Array<Maybe<IFindingInput>>;
   queuedAt: Scalars['Date'];
-  scanningAt: Scalars['Date'];
-  finishedAt: Scalars['Date'];
+  scanningAt?: Maybe<Scalars['Date']>;
+  finishedAt?: Maybe<Scalars['Date']>;
 };
 
 
@@ -254,6 +255,7 @@ export type IDeleteResponseResolvers<ContextType = any, ParentType extends IReso
 };
 
 export type IFindingResolvers<ContextType = any, ParentType extends IResolversParentTypes['Finding'] = IResolversParentTypes['Finding']> = {
+  id?: Resolver<IResolversTypes['Int'], ParentType, ContextType>;
   type?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
   ruleId?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
   location?: Resolver<IResolversTypes['FindingLocation'], ParentType, ContextType>;

@@ -6,7 +6,7 @@
 import ScanResult from '../models/ScanResult';
 import ScanResultFinding from '../models/ScanResultFinding'; 
 import { IScanResultInput, IFindingInput } from '../graphql/types';
-import { successResponse, errorResponse } from '../functions/util.function';
+import { successResponse, errorResponse, createSuccessResponse } from '../functions/util.funtion';
 
 const findingsQuery = { model: ScanResultFinding, as: "findings" };
 
@@ -78,7 +78,12 @@ class ScanResultController {
 
   static async updateScan(_id: number, {findings, ..._input}: IScanResultInput) {
     try {      
-      await ScanResult.update(_input, { returning: ["asdcasd"], where: { id: _id } });
+      await ScanResult.update(_input, { returning: [""], where: { id: _id } });
+
+      // TODO: Update this flow, this take a lot of cost
+      const finds = findings.map(f => generateFinding(_id, f!))
+      ScanResultFinding.destroy({ where: { scanResultId: _id } });
+      ScanResultFinding.bulkCreate(finds);
 
       return successResponse(`Successfully updated record with id: ${_id}`)
 
@@ -104,7 +109,7 @@ class ScanResultController {
   static async deleteScan(id: number) {
     try {
       await ScanResult.destroy({ where: { id } });
-      return successResponse(`Success delete scan result with id ${id}`)
+      return createSuccessResponse(id, `Success delete scan result with id ${id}`);
     } catch (error) {
       console.error(error)
       return errorResponse(error as string)

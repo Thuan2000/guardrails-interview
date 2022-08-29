@@ -12,7 +12,7 @@ import {
   Grid,
   Segment,
 } from "semantic-ui-react";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, FormProvider, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
@@ -47,6 +47,17 @@ const statusOptions: DropdownItemProps[] = Object.values(EStatus).map((s) => ({
   value: s,
 }));
 
+const timeInputPointRef: { [status in EStatus]: number } = {
+  Failure: 3,
+  Queued: 1,
+  InProgress: 2,
+  Success: 3,
+};
+
+function getDatetimeInputRefPoint(status: EStatus) {
+  return timeInputPointRef[status];
+}
+
 const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ initValue }) => {
   const router = useRouter();
   const methods = useForm<ISecurityScanFormValue>({
@@ -58,8 +69,14 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ initValue }) => {
     setValue,
     getValues,
     register,
+    control,
     formState: { errors },
   } = methods;
+
+  const status = useWatch<ISecurityScanFormValue>({
+    control,
+    name: "status",
+  }) as EStatus;
 
   useEffect(() => {
     register("repositoryName");
@@ -194,35 +211,51 @@ const SecurityScanForm: React.FC<ISecurityScanFormProps> = ({ initValue }) => {
               error={errors?.status?.message}
             />
             <FindingsForm />
-            <div style={{ padding: "10px 0 10px 0" }}>
-              <Grid>
-                <DatetimeInput
-                  error={getError("queuedAt")}
-                  label="Queue Date"
-                  value={getValues("queuedAt") || new Date()}
-                  onChange={(e) =>
-                    handleInputChange("queuedAt", new Date(e.toString()))
-                  }
-                />
-                <DatetimeInput
-                  error={getError("scanningAt")}
-                  label="Scanning Date"
-                  value={getValues("queuedAt") || new Date()}
-                  onChange={(e) =>
-                    handleInputChange("scanningAt", new Date(e.toString()))
-                  }
-                />
-                <DatetimeInput
-                  error={getError("finishedAt")}
-                  label="Finished Date"
-                  value={getValues("queuedAt") || new Date()}
-                  onChange={(e) =>
-                    handleInputChange("finishedAt", new Date(e.toString()))
-                  }
-                />
-                <DatetimeInput label="Queue Date" />
-              </Grid>
-            </div>
+            {!!status && (
+              <div style={{ padding: "10px 0 10px 0" }}>
+                <Grid>
+                  {timeInputPointRef[status] >= 1 && (
+                    <DatetimeInput
+                      error={getError("queuedAt")}
+                      label="Queue Date"
+                      value={getValues("queuedAt")}
+                      onChange={(e) =>
+                        handleInputChange(
+                          "queuedAt",
+                          new Date(e.toString()).getTime()
+                        )
+                      }
+                    />
+                  )}
+                  {timeInputPointRef[status] >= 2 && (
+                    <DatetimeInput
+                      error={getError("scanningAt")}
+                      label="Scanning Date"
+                      value={getValues("scanningAt")}
+                      onChange={(e) =>
+                        handleInputChange(
+                          "scanningAt",
+                          new Date(e.toString()).getTime()
+                        )
+                      }
+                    />
+                  )}
+                  {timeInputPointRef[status] >= 3 && (
+                    <DatetimeInput
+                      error={getError("finishedAt")}
+                      label="Finished Date"
+                      value={getValues("finishedAt")}
+                      onChange={(e) =>
+                        handleInputChange(
+                          "finishedAt",
+                          new Date(e.toString()).getTime()
+                        )
+                      }
+                    />
+                  )}
+                </Grid>
+              </div>
+            )}
             <Divider />
             <Button loading={scanning || updating} color="blue">
               {!!initValue ? "Update" : "Submit"}

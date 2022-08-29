@@ -10,6 +10,7 @@ export const getScansQuery = gql`
       scanningAt
       finishedAt
       findings {
+        id
         location {
           path
           begin {
@@ -33,6 +34,7 @@ export const getScanQuery = gql`
       scanningAt
       finishedAt
       findings {
+        id
         ruleId
         type
         location {

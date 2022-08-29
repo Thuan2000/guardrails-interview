@@ -10,31 +10,14 @@ import {
   fireDeleteConfirmationModal,
   fireSuccessSwalModal,
 } from "functions/swal.function";
-import { getAgoTime, getFormattedDatetime } from "functions/util.function";
-import { useRouter } from "next/router";
-import React, { useRef } from "react";
+import { getTimestampLabel, getTimestampValue } from "functions/util.function";
+import Link from "next/link";
+import React from "react";
 import { Button, Icon, Label, Table } from "semantic-ui-react";
 
 interface IScanRowProps {
   scan: ScanResult;
   onDeletedScan: (id: number) => void;
-}
-
-type TimeLabel = {
-  [k in EStatus]: string;
-};
-
-const timeLabel: TimeLabel = {
-  Queued: "Queue at",
-  InProgress: "Scanning at",
-  Success: "Finished at",
-  Failure: "",
-};
-
-function getKey(status: EStatus) {
-  if (status === EStatus.Queued) return "queuedAt";
-  if (status === EStatus.InProgress) return "scanningAt";
-  if (status === EStatus.Success) return "finishedAt";
 }
 
 function getTimestampLabel(scanResult: ScanResult) {
@@ -76,20 +59,26 @@ const ScanRow: React.FC<IScanRowProps> = ({ scan, onDeletedScan }) => {
 
   return (
     <Table.Row>
-      <Table.Cell>{scan.repositoryName}</Table.Cell>
+      <Table.Cell>
+        <Link href={`${ROUTES.selectedScansPage}/${scan.id}`}>
+          {scan.repositoryName}
+        </Link>
+      </Table.Cell>
       <Table.Cell>{scan.status}</Table.Cell>
       <Table.Cell>
         <Label color="yellow">
           <Icon name="warning sign" /> {scan.findings.length}
         </Label>
       </Table.Cell>
-      <Table.Cell>{getTimestampLabel(scan)}</Table.Cell>
+      <Table.Cell>{`${getTimestampLabel(scan)} : ${getTimestampValue(
+        scan
+      )}`}</Table.Cell>
       <Table.Cell textAlign="center">
         <Button color="blue" onClick={() => handleEditClick(scan.id)}>
-          <IconEdit /> Edit
+          <IconEdit name="edit" /> Edit
         </Button>
         <Button color="red" onClick={() => handleDeleteClick(scan.id)}>
-          <IconTrash /> Delete
+          <IconTrash name="trash" /> Delete
         </Button>
       </Table.Cell>
     </Table.Row>
