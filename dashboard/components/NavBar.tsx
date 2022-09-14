@@ -12,13 +12,7 @@ import {
   createStyles,
   Stack,
 } from "@mantine/core";
-import {
-  TablerIcon,
-  IconHome2,
-  IconList,
-  IconListCheck,
-  IconForms,
-} from "@tabler/icons";
+import { TablerIcon, IconHome2, IconList, IconForms } from "@tabler/icons";
 import { useRouter } from "next/router";
 import { ROUTES } from "constants/routes.constant";
 

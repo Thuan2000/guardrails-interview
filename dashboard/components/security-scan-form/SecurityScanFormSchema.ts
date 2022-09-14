@@ -50,32 +50,22 @@ export const securityScanFormSchema = yup.object({
     )
     .min(1, "Please add finding"),
   queuedAt: yup.string().required("Please input Queued At").nullable(),
-  scanningAt: yup.string().when("status", {
-    is: EStatus.InProgress,
-    then: yup
-      .string()
-      .required("Please input Scanning At")
-      // .min(yup.ref("queuedAt"), "Finish time must be after queue time")
-      .nullable(),
-  }).nullable(),
+  scanningAt: yup
+    .string()
+    .when("status", {
+      is: EStatus.InProgress,
+      then: yup.string().required("Please input Scanning At").nullable(),
+    })
+    .nullable(),
   finishedAt: yup
     .string()
     .when("status", {
       is: EStatus.Success,
-      then: yup
-        .string()
-        .required("Please input Finished At")
-        // .min(yup.ref("queuedAt"), "Finish time must be after queue time")
-        // .min(yup.ref("sacnningAt"), "Finish time must be after scanning time")
-        .nullable(),
+      then: yup.string().required("Please input Finished At").nullable(),
     })
     .when("status", {
       is: EStatus.Failure,
-      then: yup
-        .string()
-        .required("Please input Finished At")
-        // .min(yup.ref("queuedAt"), "Finish time must be after queue time")
-        // .min(yup.ref("sacnningAt"), "Finish time must be after scanning time")
-        .nullable(),
-    }).nullable(),
+      then: yup.string().required("Please input Finished At").nullable(),
+    })
+    .nullable(),
 });

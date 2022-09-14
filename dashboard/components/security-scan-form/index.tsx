@@ -12,11 +12,10 @@
    Grid,
    Segment,
  } from "semantic-ui-react";
- import { FormProvider, UseFormReturn, SubmitHandler } from "react-hook-form";
+ import { FormProvider } from "react-hook-form";
  
- import { EStatus, ScanResult } from "@generated/index";
+ import { EStatus } from "@generated/index";
  import FindingsForm from "./FindingsForm";
- import { ISecurityScanFormValue } from "./SecurityScanFormSchema";
  import { toTitleCase } from "@common-utils/util.function";
  import DatetimeInput from "@components/DatetimeInput";
  import { ISSFContext } from "@containers/SecurityScanForm.container";
