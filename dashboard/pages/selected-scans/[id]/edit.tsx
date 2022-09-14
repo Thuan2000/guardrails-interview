@@ -11,8 +11,10 @@ import { GetServerSideProps } from "next";
 import { generateApollo } from "@lib/withApollo";
 import { getScanQuery } from "@graphql/queries";
 import { ScanResult } from "@generated/index";
-import SecurityScanForm from "@components/contents/security-scan-form";
-import { removeTypename } from "functions/util.function";
+import SecurityScanForm from "@components/security-scan-form";
+import { removeTypename } from "@common-utils/util.function";
+import SecurityScanFormContainer from "@containers/SecurityScanForm.container";
+import { placeholderSecurityScanFormProps } from "@constants/placeholder-props";
 
 interface ISelectedScanEditPageProps {
   scan: ScanResult;
@@ -27,16 +29,16 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   });
   const scan = data.getScan;
 
-  return { props: { scan } };
+  return { props: { scan: removeTypename(scan) } };
 };
 
 const SelectedScanEditPage: React.FC<ISelectedScanEditPageProps> = ({
   scan,
 }) => {
   return (
-    <div>
-      <SecurityScanForm initValue={removeTypename(scan)} />
-    </div>
+    <SecurityScanFormContainer initValue={scan}>
+      <SecurityScanForm {...placeholderSecurityScanFormProps} />
+    </SecurityScanFormContainer>
   );
 };
 

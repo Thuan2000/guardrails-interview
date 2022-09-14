@@ -1,5 +1,5 @@
 import { IconPlus } from "@tabler/icons";
-import { fireDeleteConfirmationModal } from "functions/swal.function";
+import { fireDeleteConfirmationModal } from "common-utils/swal.function";
 import React from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Button, Divider, Header, Segment } from "semantic-ui-react";

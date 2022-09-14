@@ -1,6 +1,6 @@
 import { ESeverity } from "@generated/index";
 import { IconTrash } from "@tabler/icons";
-import { toTitleCase } from "functions/util.function";
+import { toTitleCase } from "common-utils/util.function";
 import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import {

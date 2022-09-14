@@ -14,7 +14,7 @@ import { ROUTES } from "@constants/routes.constant";
 import {
   fireDeleteConfirmationModal,
   fireSuccessSwalModal,
-} from "functions/swal.function";
+} from "common-utils/swal.function";
 
 /*
   context to be used by 3rd-level children or deeper, avoid props-drilling

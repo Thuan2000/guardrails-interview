@@ -19,7 +19,7 @@ import {
   List,
   Segment,
 } from "semantic-ui-react";
-import { getTimestampLabel, getTimestampValue } from "functions/util.function";
+import { getTimestampLabel, getTimestampValue } from "common-utils/util.function";
 import { useRouter } from "next/router";
 import { ROUTES } from "@constants/routes.constant";
 
