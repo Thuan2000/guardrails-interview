@@ -1,20 +1,25 @@
+/**
+ * Copyright Thuan Nguyen ©2022
+ * Good codes make the world a better place!
+ */
+
 import { ScanResult } from "@generated/index";
-import React, { useState } from "react";
+import React from "react";
 import { Table } from "semantic-ui-react";
 import NoScanRecord from "./NoScanRecord";
-import ScanRow from "../contents/all-scans/ScanRow";
+import ScanRow from "./ScanRow";
 
-interface IAllScansTableProps {
+export interface IAllScansTableProps {
   scans: ScanResult[];
+  handleDeleteBtnClick: (id: number) => void;
+  handleEditBtnClick: (id: number) => void;
 }
 
-const AllScansTable: React.FC<IAllScansTableProps> = ({ scans }) => {
-  const [stateScans, setStateScans] = useState(scans || []);
-
-  function handleDeletedScan(id: number) {
-    setStateScans(stateScans.filter((s) => s.id !== id));
-  }
-
+const AllScansTable: React.FC<IAllScansTableProps> = ({
+  scans,
+  handleDeleteBtnClick,
+  handleEditBtnClick,
+}) => {
   return (
     <Table celled>
       <Table.Header>
@@ -28,12 +33,13 @@ const AllScansTable: React.FC<IAllScansTableProps> = ({ scans }) => {
       </Table.Header>
 
       <Table.Body>
-        {!!stateScans.length ? (
-          stateScans.map((s) => (
+        {!!scans.length ? (
+          scans.map((s) => (
             <ScanRow
               key={s.id + "scan-row"}
               scan={s}
-              onDeletedScan={handleDeletedScan}
+              handleEditBtnClick={handleEditBtnClick}
+              handleDeleteBtnClick={handleDeleteBtnClick}
             />
           ))
         ) : (

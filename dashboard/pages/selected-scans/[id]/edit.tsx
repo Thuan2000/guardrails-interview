@@ -9,7 +9,7 @@ import PageLayout from "@components/PageLayout";
 import { TReactComponentWithLayout } from "constants/common-types";
 import { GetServerSideProps } from "next";
 import { generateApollo } from "@lib/withApollo";
-import { getScanQuery, getScansQuery } from "@graphql/queries";
+import { getScanQuery } from "@graphql/queries";
 import { ScanResult } from "@generated/index";
 import SecurityScanForm from "@components/contents/security-scan-form";
 import { removeTypename } from "functions/util.function";

@@ -14,7 +14,6 @@ import { ScanResult, useDeleteScanMutation } from "@generated/index";
 import {
   Button,
   Container,
-  Grid,
   Header,
   Icon,
   List,
@@ -100,26 +99,26 @@ const SelectedScansPage: React.FC<ISelectedScansPageProps> = ({ scan }) => {
                   <List.Item>
                     <strong>Location</strong>
 
-                    <Container style={{ paddingLeft: 10 }}>
+                    <Container style={{ paddingLeft: 8 }}>
                       <strong>Path: </strong>
                       <span>{path}</span>
                     </Container>
-                    <Container style={{ paddingLeft: 10 }}>
+                    <Container style={{ paddingLeft: 8 }}>
                       <strong>Begin: </strong>
                       <span>{begin.line}</span>
                     </Container>
-                    <Container style={{ paddingLeft: 10 }}>
+                    <Container style={{ paddingLeft: 8 }}>
                       <strong>End: </strong>
                       <span>{end.line}</span>
                     </Container>
                   </List.Item>
                   <List.Item>
                     <strong>Vulnerability Detail</strong>
-                    <Container style={{ paddingLeft: 10 }}>
+                    <Container style={{ paddingLeft: 8 }}>
                       <strong>Severity Type: </strong>
                       <span>{severity}</span>
                     </Container>
-                    <Container style={{ paddingLeft: 10 }}>
+                    <Container style={{ paddingLeft: 8 }}>
                       <strong>Description: </strong>
                       <span>{description}</span>
                     </Container>
