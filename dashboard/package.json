@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "codegen": "node -r dotenv/config $(yarn bin)/graphql-codegen --config codegen.yml"
+    "codegen": "node -r dotenv/config $(yarn bin)/graphql-codegen --config codegen.yml",
+    "test": "jest --watch",
+    "test:ci": "jest --ci"
   },
   "dependencies": {
     "@apollo/client": "^3.3.18",
@@ -24,7 +26,7 @@
     "graphql": "^15.5.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
-    "next": "10.2.0",
+    "next": "latest",
     "next-with-apollo": "^5.1.1",
     "react": "17.0.2",
     "react-datetime": "^3.1.1",
@@ -35,16 +37,23 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.1.3",
     "sweetalert2": "^11.4.29",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "@types/react-dom": "17.0.14",
+    "@types/react": "~18.0.0",
+    "@types/react-native": "~0.69.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "5.16.4",
+    "@testing-library/react": "13.2.0",
+    "@testing-library/user-event": "14.2.0",
+    "jest": "28.1.0",
+    "jest-environment-jsdom": "28.1.0",
     "@graphql-codegen/add": "^2.0.2",
     "@graphql-codegen/cli": "^1.21.4",
     "@graphql-codegen/typescript-operations": "^1.17.16",
     "@graphql-codegen/typescript-react-apollo": "^2.2.4",
     "@types/lodash": "^4.14.169",
     "@types/moment": "^2.13.0",
-    "@types/react": "^17.0.5",
     "typescript": "^4.2.4"
   }
 }
