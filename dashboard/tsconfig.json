@@ -25,7 +25,8 @@
       "@pages/*": ["pages/*"],
       "@components/*": ["components/*"],
       "@generated/*": ["generated/*"],
-      "@constants/*": ["constants/*"]
+      "@constants/*": ["constants/*"],
+      "@containers/*": ["containers/*"]
     }
   },
   "include": [

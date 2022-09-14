@@ -2,7 +2,7 @@ import { ScanResult } from "@generated/index";
 import React, { useState } from "react";
 import { Table } from "semantic-ui-react";
 import NoScanRecord from "./NoScanRecord";
-import ScanRow from "./ScanRow";
+import ScanRow from "../contents/all-scans/ScanRow";
 
 interface IAllScansTableProps {
   scans: ScanResult[];

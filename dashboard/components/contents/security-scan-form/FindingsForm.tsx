@@ -4,7 +4,6 @@ import React from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Button, Divider, Header, Segment } from "semantic-ui-react";
 import FindingForm from "./FindingForm";
-import Swal from "sweetalert2";
 import {
   IFindingInput,
   ISecurityScanFormValue,
