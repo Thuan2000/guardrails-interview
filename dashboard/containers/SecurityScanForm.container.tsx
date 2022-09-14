@@ -4,7 +4,16 @@
  */
 
 import React, { ReactElement, JSXElementConstructor, useEffect } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import {
+  FieldArrayWithId,
+  SubmitHandler,
+  useFieldArray,
+  UseFieldArrayAppend,
+  UseFieldArrayRemove,
+  useForm,
+  UseFormReturn,
+  useWatch,
+} from "react-hook-form";
 import { useRouter } from "next/router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
@@ -18,29 +27,52 @@ import {
   ScanResultInput,
 } from "@generated/index";
 import { generateScanFormDefaultValue } from "./utils";
-import { fireSuccessSwalModal } from "@common-utils/swal.function";
-import { ISecurityScanFormValue, securityScanSchema } from "./types";
+import {
+  fireDeleteConfirmationModal,
+  fireSuccessSwalModal,
+} from "@common-utils/swal.function";
+import {
+  ISecurityScanFormValue,
+  securityScanFormSchema,
+  findingDefaultValue,
+} from "./types";
 import { ROUTES } from "@constants/routes.constant";
-
-interface ISecurityScanFormProps {
+import { placeholderSSFContext } from "@constants/placeholder-props";
+import { ButtonProps } from "semantic-ui-react";
+export interface ISSFContext {
   initValue?: ScanResult;
+  methods?: UseFormReturn<ISecurityScanFormValue, any>;
+  status: EStatus;
+  scan: any;
+  updateScan: any;
+  scanning: boolean;
+  updating: boolean;
+  handleInputChange: Function;
+  onSubmit?: SubmitHandler<ISecurityScanFormValue>;
+  getError: Function;
+  handleAddFinding: (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    data: ButtonProps
+  ) => void;
+  handleDeleteFinding: (idx: number) => void;
+  fields?: FieldArrayWithId<ISecurityScanFormValue, "findings", "id">[];
+  append?: UseFieldArrayAppend<ISecurityScanFormValue, "findings">;
+  remove?: UseFieldArrayRemove;
 }
 
 /* 
    context to be used by 3rd-level children or deeper, avoid props-drilling 
    If direct children or grandchildren (2nd-level or shallower), please use props directly.
  */
-export const SecurityScanFormContext = React.createContext({});
+export const SecurityScanFormContext = React.createContext(
+  placeholderSSFContext
+);
 
-const SecurityScanFormContainer: React.FC<
-  ISecurityScanFormProps & {
-    children: ReactElement<any, string | JSXElementConstructor<any>>;
-  }
-> = (props) => {
+const SecurityScanFormContainer: React.FC<ISSFContext> = (props) => {
   const router = useRouter();
   const { initValue } = props;
   const methods = useForm<ISecurityScanFormValue>({
-    resolver: yupResolver(securityScanSchema),
+    resolver: yupResolver(securityScanFormSchema),
     defaultValues: generateScanFormDefaultValue(props.initValue),
   });
   const {
@@ -55,6 +87,11 @@ const SecurityScanFormContainer: React.FC<
     control,
     name: "status",
   }) as EStatus;
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "findings",
+  });
 
   useEffect(() => {
     register("repositoryName");
@@ -105,6 +142,22 @@ const SecurityScanFormContainer: React.FC<
       __resetForm();
       router.replace(ROUTES.allScansPage);
     }
+  }
+
+  async function handleAddFinding() {
+    const d = await trigger("findings");
+    // First finding form not yet added then we return
+    if (!d && fields.length >= 1) return;
+    append(findingDefaultValue);
+  }
+
+  async function handleDeleteFinding(idx: number) {
+    const { isConfirmed } = await fireDeleteConfirmationModal(
+      "Delete Finding?",
+      "Are you sure want to delete finding?"
+    );
+
+    if (isConfirmed) remove(idx);
   }
 
   /**
@@ -168,7 +221,7 @@ const SecurityScanFormContainer: React.FC<
      [Private Utility Function]
      Assembles all logic handlers and state to be passed as props or context value.
    */
-  function __assembleProps() {
+  function __assembleProps(): ISSFContext {
     return {
       methods,
       status,
@@ -179,11 +232,22 @@ const SecurityScanFormContainer: React.FC<
       handleInputChange,
       onSubmit,
       getError,
+      handleAddFinding,
+      handleDeleteFinding,
+      fields,
+      append,
+      remove,
     };
   }
   return (
     <SecurityScanFormContext.Provider value={__assembleProps()}>
-      {React.cloneElement(props.children, __assembleProps())}
+      {React.cloneElement(
+        props.children as ReactElement<
+          any,
+          string | JSXElementConstructor<any>
+        >,
+        __assembleProps()
+      )}
     </SecurityScanFormContext.Provider>
   );
 };

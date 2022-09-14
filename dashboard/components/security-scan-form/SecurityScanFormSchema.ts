@@ -20,7 +20,7 @@ export interface ISecurityScanFormValue {
   finishedAt: Date;
 }
 
-export const securityScanSchema = yup.object({
+export const securityScanFormSchema = yup.object({
   repositoryName: yup.string().required("Please fill repository name input"),
   status: yup.string().required("Please select status"),
   findings: yup

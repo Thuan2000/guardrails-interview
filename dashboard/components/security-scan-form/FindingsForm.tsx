@@ -1,47 +1,20 @@
+/**
+ * Copyright Thuan Nguyen ©2022
+ * Good codes make the world a better place!
+ */
+
 import { IconPlus } from "@tabler/icons";
-import { fireDeleteConfirmationModal } from "common-utils/swal.function";
-import React from "react";
+import React, { useContext } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Button, Divider, Header, Segment } from "semantic-ui-react";
-import FindingForm from "./FindingForm";
-import {
-  IFindingInput,
-  ISecurityScanFormValue,
-} from "./SecurityScanFormSchema";
+import FindingInput from "./FindingInput";
+import { SecurityScanFormContext } from "@containers/SecurityScanForm.container";
 
 interface IFindingsFormProps {}
 
-const findingDefaultValue: IFindingInput = {
-  type: "",
-  ruleId: "",
-  path: "",
-  begin: null,
-  end: null,
-  description: "",
-  severityType: null,
-};
-
 const FindingsForm: React.FC<IFindingsFormProps> = ({ ...props }) => {
-  const { trigger } = useFormContext<ISecurityScanFormValue>();
-  const { fields, append, remove } = useFieldArray<ISecurityScanFormValue>({
-    name: "findings",
-  });
-
-  async function handleAddFinding() {
-    const d = await trigger("findings");
-    // First finding form not yet added then we return
-    if (!d && fields.length >= 1) return;
-    append(findingDefaultValue);
-  }
-
-  async function handleDeleteFinding(idx: number) {
-    const { isConfirmed } = await fireDeleteConfirmationModal(
-      "Delete Finding?",
-      "Are you sure want to delete finding?"
-    );
-
-    if (isConfirmed) remove(idx);
-  }
+  const SSFC = useContext(SecurityScanFormContext);
+  const { handleAddFinding, handleDeleteFinding, fields } = SSFC;
 
   return (
     <>
@@ -50,7 +23,7 @@ const FindingsForm: React.FC<IFindingsFormProps> = ({ ...props }) => {
         {fields.map((f, idx) => {
           return (
             <div key={f.id}>
-              <FindingForm onDeleteFinding={handleDeleteFinding} idx={idx} />
+              <FindingInput onDeleteFinding={handleDeleteFinding} idx={idx} />
               <Divider />
             </div>
           );

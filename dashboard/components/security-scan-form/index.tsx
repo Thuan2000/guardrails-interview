@@ -19,19 +19,7 @@
  import { ISecurityScanFormValue } from "./SecurityScanFormSchema";
  import { toTitleCase } from "@common-utils/util.function";
  import DatetimeInput from "@components/DatetimeInput";
- 
- export interface ISecurityScanFormProps {
-   initValue?: ScanResult;
-   methods?: UseFormReturn<ISecurityScanFormValue, any>;
-   status: EStatus;
-   scan: any;
-   updateScan: any;
-   scanning: boolean;
-   updating: boolean;
-   handleInputChange: Function;
-   onSubmit?: SubmitHandler<ISecurityScanFormValue>;
-   getError: Function;
- }
+ import { ISSFContext } from "@containers/SecurityScanForm.container";
  
  const statusOptions: DropdownItemProps[] = Object.values(EStatus).map((s) => ({
    text: toTitleCase(s),
@@ -45,7 +33,7 @@
    Success: 3,
  };
  
- const SecurityScanForm: React.FC<ISecurityScanFormProps> = (props) => {
+ const SecurityScanForm: React.FC<ISSFContext> = (props) => {
    const {
      methods,
      status,

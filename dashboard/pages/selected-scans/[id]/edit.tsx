@@ -14,7 +14,7 @@ import { ScanResult } from "@generated/index";
 import SecurityScanForm from "@components/security-scan-form";
 import { removeTypename } from "@common-utils/util.function";
 import SecurityScanFormContainer from "@containers/SecurityScanForm.container";
-import { placeholderSecurityScanFormProps } from "@constants/placeholder-props";
+import { placeholderSSFContext } from "@constants/placeholder-props";
 
 interface ISelectedScanEditPageProps {
   scan: ScanResult;
@@ -37,7 +37,7 @@ const SelectedScanEditPage: React.FC<ISelectedScanEditPageProps> = ({
 }) => {
   return (
     <SecurityScanFormContainer initValue={scan}>
-      <SecurityScanForm {...placeholderSecurityScanFormProps} />
+      <SecurityScanForm {...placeholderSSFContext} />
     </SecurityScanFormContainer>
   );
 };
