@@ -1,6 +1,6 @@
 import React from "react";
 import NumberFormat, { NumberFormatProps } from "react-number-format";
-import { Form, Label } from "semantic-ui-react";
+import { Form, Header, Label } from "semantic-ui-react";
 
 interface INumberInputProps extends NumberFormatProps {
   label?: string;
