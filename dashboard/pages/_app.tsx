@@ -13,7 +13,7 @@ import Head from "next/head";
 import { MantineProvider } from "@mantine/core";
 import withApollo from "@lib/withApollo";
 
-const NoLayout: React.FC = ({ children }) => <>{children}</>;
+const NoLayout: React.FC<any> = ({ children }) => <>{children}</>;
 
 function App(props: AppProps) {
   const { Component, pageProps } = props;

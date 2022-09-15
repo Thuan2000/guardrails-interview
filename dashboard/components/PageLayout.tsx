@@ -7,7 +7,7 @@ import React from "react";
 import { AppShell, Header, Footer } from '@mantine/core';
 import { NavbarMinimal } from '@components/NavBar';
 
-const PageLayout: React.FC = ({ children }) => {
+const PageLayout: React.FC<any> = ({ children }) => {
     return (
         <AppShell
             padding="md"

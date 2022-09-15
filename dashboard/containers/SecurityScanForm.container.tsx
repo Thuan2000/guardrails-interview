@@ -68,7 +68,7 @@ export const SecurityScanFormContext = React.createContext(
   placeholderSSFContext
 );
 
-const SecurityScanFormContainer: React.FC<ISSFContext> = (props) => {
+const SecurityScanFormContainer: React.FC<any> = (props) => {
   const router = useRouter();
   const { initValue } = props;
   const methods = useForm<ISecurityScanFormValue>({
