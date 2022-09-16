@@ -6,7 +6,7 @@
 import { ROUTES } from "@constants/routes.constant";
 import { ScanResult } from "@generated/index";
 import { IconEdit, IconTrash } from "@tabler/icons";
-import { getTimestampLabel, getTimestampValue } from "common-utils/util.function";
+import { getTimestampLabel, getTimestampValue } from "@common-utils/util.function";
 import Link from "next/link";
 import React from "react";
 import { Button, Icon, Label, Table } from "semantic-ui-react";

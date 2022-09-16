@@ -5,7 +5,7 @@
 
 import { ESeverity } from "@generated/index";
 import { IconTrash } from "@tabler/icons";
-import { toTitleCase } from "common-utils/util.function";
+import { toTitleCase } from "@common-utils/util.function";
 import React, { useContext, useEffect } from "react";
 import {
   Segment,

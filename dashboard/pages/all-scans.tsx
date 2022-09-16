@@ -7,7 +7,7 @@
 
  import PageLayout from "@components/PageLayout";
  
- import { TReactComponentWithLayout } from "constants/common-types";
+ import { TReactComponentWithLayout } from "@constants/common-types";
  import { ScanResult } from "@generated/index";
  import AllScansTable from "@components/all-scans/AllScansTable";
  import AllScansContainer from "@containers/AllScans.container";

@@ -1,0 +1,256 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home:  + matches snapshot 1`] = `
+<div>
+  <div
+    className="mantine-Container-root mantine-15pjuqq"
+  >
+    <div
+      className="mantine-1vghtr5"
+    >
+      <div
+        className="mantine-vdkfn5"
+      >
+        <h1
+          className="mantine-Text-root mantine-Title-root mantine-13ndadf"
+        >
+          A 
+          <span
+            className="mantine-1jac2fs"
+          >
+            dedicated
+          </span>
+          <br />
+           Full-stack Developer
+        </h1>
+        <div
+          className="mantine-Text-root mantine-qw4l90"
+        >
+          My name is Thuan Nguyen located in Vietnam. I live to build great products. 
+          <br />
+          <br />
+          There are three pages in this application, two of which are accessible via the left navigation bar, respectively:
+        </div>
+        <ul
+          className="mantine-List-root mantine-ephyri"
+        >
+          <li
+            className="mantine-List-item mantine-List-withIcon mantine-990sqx"
+          >
+            <div
+              className="__mantine-ref-itemWrapper mantine-1hf9p21 mantine-List-itemWrapper"
+            >
+              <span
+                className="mantine-amxt3q mantine-List-itemIcon"
+              >
+                <div
+                  className="mantine-ThemeIcon-root mantine-17dkyrq"
+                >
+                  <svg
+                    className="icon icon-tabler icon-tabler-check"
+                    fill="none"
+                    height={12}
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    viewBox="0 0 24 24"
+                    width={12}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 0h24v24H0z"
+                      fill="none"
+                      stroke="none"
+                    />
+                    <path
+                      d="M5 12l5 5l10 -10"
+                    />
+                  </svg>
+                </div>
+              </span>
+              <span>
+                <b>
+                  Input Security Scan Page
+                </b>
+                 – Fill in the form to record/input a new scan result.
+              </span>
+            </div>
+          </li>
+          <li
+            className="mantine-List-item mantine-List-withIcon mantine-990sqx"
+          >
+            <div
+              className="__mantine-ref-itemWrapper mantine-1hf9p21 mantine-List-itemWrapper"
+            >
+              <span
+                className="mantine-amxt3q mantine-List-itemIcon"
+              >
+                <div
+                  className="mantine-ThemeIcon-root mantine-17dkyrq"
+                >
+                  <svg
+                    className="icon icon-tabler icon-tabler-check"
+                    fill="none"
+                    height={12}
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    viewBox="0 0 24 24"
+                    width={12}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 0h24v24H0z"
+                      fill="none"
+                      stroke="none"
+                    />
+                    <path
+                      d="M5 12l5 5l10 -10"
+                    />
+                  </svg>
+                </div>
+              </span>
+              <span>
+                <b>
+                  View All Scans Page
+                </b>
+                 – List all the scan results. Allows delete, update and select a scan result.
+              </span>
+            </div>
+          </li>
+          <li
+            className="mantine-List-item mantine-List-withIcon mantine-990sqx"
+          >
+            <div
+              className="__mantine-ref-itemWrapper mantine-1hf9p21 mantine-List-itemWrapper"
+            >
+              <span
+                className="mantine-amxt3q mantine-List-itemIcon"
+              >
+                <div
+                  className="mantine-ThemeIcon-root mantine-17dkyrq"
+                >
+                  <svg
+                    className="icon icon-tabler icon-tabler-check"
+                    fill="none"
+                    height={12}
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    viewBox="0 0 24 24"
+                    width={12}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 0h24v24H0z"
+                      fill="none"
+                      stroke="none"
+                    />
+                    <path
+                      d="M5 12l5 5l10 -10"
+                    />
+                  </svg>
+                </div>
+              </span>
+              <span>
+                <b>
+                  View Selected Scan Page
+                </b>
+                 – Click on one of the scans in the "All Scans Page" to access this page.
+              </span>
+            </div>
+          </li>
+        </ul>
+        <div
+          className="mantine-Group-root mantine-inb06y"
+        >
+          <button
+            className="mantine-UnstyledButton-root mantine-Button-root mantine-vun5q9"
+            data-button={true}
+            onClick={[Function]}
+            onMouseEnter={[Function]}
+            onTouchStart={[Function]}
+            type="button"
+          >
+            <div
+              className="mantine-3xbgk5 mantine-Button-inner"
+            >
+              <span
+                className="mantine-qo1k2 mantine-Button-label"
+                style={
+                  Object {
+                    "textTransform": undefined,
+                  }
+                }
+              >
+                To "Input Scan Result" Page
+              </span>
+            </div>
+          </button>
+          <a
+            className="mantine-gnzaph mantine-Group-child"
+            href="https://github.com/Thuan2000/guardrails-interview"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <button
+              className="mantine-UnstyledButton-root mantine-Button-root mantine-1r1o7v6"
+              data-button={true}
+              type="button"
+            >
+              <div
+                className="mantine-3xbgk5 mantine-Button-inner"
+              >
+                <span
+                  className="mantine-qo1k2 mantine-Button-label"
+                  style={
+                    Object {
+                      "textTransform": undefined,
+                    }
+                  }
+                >
+                  Source code
+                </span>
+              </div>
+            </button>
+          </a>
+        </div>
+      </div>
+      <div
+        className="mantine-Image-root mantine-16na3tf"
+        style={
+          Object {
+            "height": "auto",
+            "width": "100%",
+          }
+        }
+      >
+        <figure
+          className="mantine-11nhzn5 mantine-Image-figure"
+        >
+          <div
+            className="mantine-qqmv3w mantine-Image-imageWrapper"
+          >
+            <img
+              className="mantine-3y8yz3 mantine-Image-image"
+              onError={[Function]}
+              onLoad={[Function]}
+              src="/images/programmer.svg"
+              style={
+                Object {
+                  "height": "auto",
+                  "objectFit": "cover",
+                  "width": "100%",
+                }
+              }
+            />
+          </div>
+        </figure>
+      </div>
+    </div>
+  </div>
+</div>
+`;

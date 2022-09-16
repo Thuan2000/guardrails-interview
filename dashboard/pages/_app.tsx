@@ -39,6 +39,7 @@ function App(props: AppProps) {
           colorScheme: "light",
         }}
       >
+        {/* @ts-expect-error: The children properties default values are passed below already. Let's ignore Typescript for this line */}
         <Layout>
           <Component {...pageProps} />
         </Layout>

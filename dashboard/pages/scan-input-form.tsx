@@ -8,7 +8,7 @@ import SecurityScanForm from "@components/security-scan-form";
 import PageLayout from "@components/PageLayout";
 import { placeholderSSFContext } from '@constants/placeholder-props';
 
-import { TReactComponentWithLayout } from "constants/common-types";
+import { TReactComponentWithLayout } from "@constants/common-types";
 import { Container, Header } from "semantic-ui-react";
 import SecurityScanFormContainer from "@containers/SecurityScanForm.container";
 
@@ -20,7 +20,6 @@ const ScanInputFormPage: React.FC<IScanInputFormPageProps> = () => {
       <Header textAlign="center" as="h3">
         Add Your Security Scan Result By Filling This Form
       </Header>
-      {/* @ts-expect-error: The children properties default values are passed below already. Let's ignore Typescript for this line */}
       <SecurityScanFormContainer>
         {/* Placeholder values */}
         <SecurityScanForm {...placeholderSSFContext}/>

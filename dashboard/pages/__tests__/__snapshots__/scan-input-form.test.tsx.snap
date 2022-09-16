@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Scan Input Form Page:  + matches snapshot 1`] = `
+<div
+  className="ui container"
+>
+  <h3
+    className="ui center aligned header"
+  >
+    Add Your Security Scan Result By Filling This Form
+  </h3>
+  <div
+    style={
+      Object {
+        "margin": "auto",
+        "width": "868px",
+      }
+    }
+  >
+    <div
+      className="ui segment"
+    >
+      <form
+        className="ui form"
+        onSubmit={[Function]}
+      >
+        <div
+          className="field"
+        >
+          <label>
+            Repository Name
+          </label>
+          <div
+            className="ui input"
+          >
+            <input
+              aria-describedby={null}
+              onChange={[Function]}
+              placeholder="SDConnect"
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
+        <div
+          className="field"
+        >
+          <label>
+            Status
+          </label>
+          <div
+            aria-describedby={null}
+            aria-expanded={false}
+            className="ui selection dropdown"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onMouseDown={[Function]}
+            role="listbox"
+            tabIndex={0}
+          >
+            <div
+              aria-atomic={true}
+              aria-live="polite"
+              className="divider default text"
+              role="alert"
+            >
+              Status
+            </div>
+            <i
+              aria-hidden="true"
+              className="dropdown icon"
+              onClick={[Function]}
+            />
+            <div
+              className="menu transition"
+            >
+              <div
+                aria-checked={false}
+                aria-selected={true}
+                className="selected item"
+                onClick={[Function]}
+                role="option"
+                style={
+                  Object {
+                    "pointerEvents": "all",
+                  }
+                }
+              >
+                <span
+                  className="text"
+                >
+                  Queued
+                </span>
+              </div>
+              <div
+                aria-checked={false}
+                aria-selected={false}
+                className="item"
+                onClick={[Function]}
+                role="option"
+                style={
+                  Object {
+                    "pointerEvents": "all",
+                  }
+                }
+              >
+                <span
+                  className="text"
+                >
+                  Inprogress
+                </span>
+              </div>
+              <div
+                aria-checked={false}
+                aria-selected={false}
+                className="item"
+                onClick={[Function]}
+                role="option"
+                style={
+                  Object {
+                    "pointerEvents": "all",
+                  }
+                }
+              >
+                <span
+                  className="text"
+                >
+                  Success
+                </span>
+              </div>
+              <div
+                aria-checked={false}
+                aria-selected={false}
+                className="item"
+                onClick={[Function]}
+                role="option"
+                style={
+                  Object {
+                    "pointerEvents": "all",
+                  }
+                }
+              >
+                <span
+                  className="text"
+                >
+                  Failure
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h4
+          className="ui header"
+        >
+          Findings Input
+        </h4>
+        <div
+          className="ui segment"
+        >
+          <button
+            className="ui button"
+            onClick={[Function]}
+            type="button"
+          >
+            <svg
+              className="icon icon-tabler icon-tabler-plus"
+              fill="none"
+              height={24}
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+              width={24}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+                stroke="none"
+              />
+              <line
+                x1={12}
+                x2={12}
+                y1={5}
+                y2={19}
+              />
+              <line
+                x1={5}
+                x2={19}
+                y1={12}
+                y2={12}
+              />
+            </svg>
+             Add Finding
+          </button>
+        </div>
+        <div
+          className="ui divider"
+        />
+        <button
+          className="ui blue button"
+          onClick={[Function]}
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+`;

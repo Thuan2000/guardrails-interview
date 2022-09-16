@@ -17,7 +17,7 @@ import Link from 'next/link';
 import { IconCheck } from '@tabler/icons';
 
 import useStyles from './HeroWithBullets.styles';
-import { ROUTES } from 'constants/routes.constant';
+import { ROUTES } from '@constants/routes.constant';
 
 export function HeroBullets() {
   const { classes } = useStyles();

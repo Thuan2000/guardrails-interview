@@ -20,7 +20,7 @@ import {
   IconForms,
 } from "@tabler/icons";
 import { useRouter } from "next/router";
-import { ROUTES } from "constants/routes.constant";
+import { ROUTES } from "@constants/routes.constant";
 
 const useStyles = createStyles((theme) => ({
   link: {

@@ -45,6 +45,8 @@ export type Finding = {
   ruleId: Scalars['String'];
   location: FindingLocation;
   metadata?: Maybe<FindingMetadata>;
+  scanningAt?: Maybe<Scalars['Date']>;
+  finishedAt?: Maybe<Scalars['Date']>;
 };
 
 export type FindingInput = {

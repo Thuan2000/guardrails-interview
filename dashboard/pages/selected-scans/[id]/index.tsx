@@ -6,7 +6,7 @@
 import React from "react";
 import PageLayout from "@components/PageLayout";
 
-import { TReactComponentWithLayout } from "constants/common-types";
+import { TReactComponentWithLayout } from "@constants/common-types";
 import { getScanQuery } from "@graphql/queries";
 import { generateApollo } from "@lib/withApollo";
 import { GetServerSideProps } from "next";
