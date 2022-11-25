@@ -11,7 +11,7 @@ exports[`Scan Input Form Page:  + matches snapshot 1`] = `
   </h3>
   <div
     style={
-      Object {
+      {
         "margin": "auto",
         "width": "868px",
       }
@@ -84,7 +84,7 @@ exports[`Scan Input Form Page:  + matches snapshot 1`] = `
                 onClick={[Function]}
                 role="option"
                 style={
-                  Object {
+                  {
                     "pointerEvents": "all",
                   }
                 }
@@ -102,7 +102,7 @@ exports[`Scan Input Form Page:  + matches snapshot 1`] = `
                 onClick={[Function]}
                 role="option"
                 style={
-                  Object {
+                  {
                     "pointerEvents": "all",
                   }
                 }
@@ -120,7 +120,7 @@ exports[`Scan Input Form Page:  + matches snapshot 1`] = `
                 onClick={[Function]}
                 role="option"
                 style={
-                  Object {
+                  {
                     "pointerEvents": "all",
                   }
                 }
@@ -138,7 +138,7 @@ exports[`Scan Input Form Page:  + matches snapshot 1`] = `
                 onClick={[Function]}
                 role="option"
                 style={
-                  Object {
+                  {
                     "pointerEvents": "all",
                   }
                 }

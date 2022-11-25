@@ -1,7 +1,8 @@
 import { EStatus, ScanResult } from "@generated/index";
 import { format, formatDistance } from "date-fns";
 
-export function toTitleCase(str) {
+export function toTitleCase(str: string) {
+  if (str === "") throw "The string should not empty";
   return str.replace(/\w\S*/g, function (txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
@@ -15,6 +16,8 @@ export function getAgoTime(date: Date) {
 }
 
 export function removeTypename({ typename, ...obj }: any) {
+  if (!typename) throw "typename is not existed";
+  if (obj === undefined) throw "object is not existed";
   return obj;
 }
 
@@ -45,6 +48,7 @@ export function getTimestampValue(scanResult: ScanResult) {
 }
 
 export function getTimestampLabel(scanResult: ScanResult) {
+  if (!scanResult.status) throw ("status is not existed in scanResult")
   const label = timeLabel[scanResult.status];
   return label;
 }

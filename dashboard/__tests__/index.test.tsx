@@ -4,7 +4,7 @@
  */
 
 import { render } from '@testing-library/react'
-import Home from '../index'
+import Home from '../pages/index'
 import renderer from 'react-test-renderer';
 
 describe('Home: ', () => {

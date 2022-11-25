@@ -4,7 +4,7 @@
  */
 
 import { render } from "@testing-library/react";
-import AllScansPage from "../all-scans";
+import AllScansPage from "../pages/all-scans";
 import { MockedProvider } from "@apollo/client/testing";
 import renderer from "react-test-renderer";
 
