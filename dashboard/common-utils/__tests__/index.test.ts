@@ -172,7 +172,7 @@ describe('Utility functions unit testing: ', () => {
     expect(getTimestampLabel(scanResult as any )).toBe("Finished at");
   })
 
-  it('+ with input: scanResult have the status undifined", getTimeStampValue should throw Error', () => {
+  it('+ with input: scanResult have the status undefined", getTimeStampValue should throw Error', () => {
     
     const scanResult = {
       __typename: 'ScanResult',
