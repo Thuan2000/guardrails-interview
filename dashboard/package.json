@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "codegen": "node -r dotenv/config $(yarn bin)/graphql-codegen --config codegen.yml",
-    "test": "jest --watch",
-    "test:ci": "jest --ci"
+    "test": "jest --watch --verbose",
+    "test:ci": "jest --ci --verbose"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",

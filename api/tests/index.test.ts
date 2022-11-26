@@ -5,7 +5,7 @@ import {
 } from "../src/functions/util.funtion";
 
 describe("Utility's functions unit testing: ", () => {
-  it("+ with input: \"success\" should return {success: true, message: \"success\"}", () => {
+  it("+ with input: \"success\", successResponse should return {success: true, message: \"success\"}", () => {
     expect(successResponse("success")).toStrictEqual({
       success: true,
       message: "success"

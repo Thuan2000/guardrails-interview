@@ -20,7 +20,6 @@
     "dev": "nodemon src/index.ts",
     "migrate:start": "yarn db:migrate && ts-node src/index.ts",
     "start": "ts-node src/index.ts",
-    "test": "run-s test:*",
     "test:lint": "tslint --project . && prettier \"src/**/*.ts\" --list-different",
     "test:types": "tsc -p . --noEmit",
     "test:unit": "jest --watch",
