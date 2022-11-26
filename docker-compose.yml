@@ -38,6 +38,8 @@ services:
       - api
     ports:
       - 3000:3000
+    environment:
+      NEXT_PUBLIC_AM_I_IN_DOCKER: true
     networks:
       - guardrails-network
     env_file:

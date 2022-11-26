@@ -15,7 +15,9 @@ export const generateApollo = (
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: new HttpLink({
-      uri: process.env.NEXT_PUBLIC_API_GRAPHQL_ENDPOINT,
+      uri: process.env.NEXT_PUBLIC_AM_I_IN_DOCKER ? 
+      process.env.NEXT_PUBLIC_API_SSR_GRAPHQL_ENDPOINT
+      : process.env.NEXT_PUBLIC_API_GRAPHQL_ENDPOINT,
     }),
     headers: {
       ...(headers as Record<string, string>),
