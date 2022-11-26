@@ -1,6 +1,6 @@
 <div align="center">
   <a name="readme-top"/>
-  <h1 align="center">GuardRails Fullstack Challenge <a target="_blank" href="https://thuan-public-test-2.s3.ap-southeast-1.amazonaws.com/guardrails-interview.mp4">Demo Video</a>.</h1>
+  <h1 align="center">GuardRails Fullstack Challenge <a target="_blank" href="https://thuan-public-test-2.s3.ap-southeast-1.amazonaws.com/GuardRails-Interview.mp4">Demo Video</a>.</h1>
   <p align="center">
     Thuan Nguyen, Vietnam. (Challenge period: 22<sup>nd</sup>Aug to 29<sup>th</sup>Aug, 2022).
     <br />
@@ -26,11 +26,13 @@
         <a href="#running-from-source">Running from source</a>
         <ul>
             <li><a href="#development-mode">a. Development mode</a></li>
-            <li><a href="#built-mode">a. Built mode</a></li>
+            <li><a href="#built-mode">b. Built mode</a></li>
         </ul>
     </li>
-    <li><a href="#contact-information">Contact Information</a></li>
+    <li><a href="#run-tests">Run Tests</a></li>
     <li><a href="#environment-variables">Environment Variables</a></li>
+    <li><a href="#code-patterns">Code Patterns Explanation</a></li>
+    <li><a href="#contact-information">Contact Information</a></li>
     <li><a href="#license">License</a></li>
   </ol>
 </details>
@@ -90,12 +92,12 @@ Before you are able to run the project, make sure you have installed these depen
 3. In ```/dashboard``` run ```yarn && yarn build && yarn start```. (Note: only run this after step #3).
 
 
-<!-- USAGE EXAMPLES -->
-<a name="contact-information"/>
+<a name="run-tests"/>
 
-## Contact Information
-* Email: nhthuan20@gmail.com
-* WhatsApp/Telegram: +84 70 284 5158
+## Run Tests:
+There are two test suites:
+* In `/api` folder: unit tests for all utility functions within the backend. Run `yarn test:unit` to start the tests.
+* In `/dashboard` folder: unit tests for all utility functions + component snapshot tests for the frontend. Run `yarn test` to start the tests.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -123,8 +125,24 @@ NEXT_PUBLIC_API_SSR_GRAPHQL_ENDPOINT=http://gr-api:8080/graphql (used for NextJS
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- CODE PATTERNS EXPLANATION -->
+<a name="code-patterns"/>
+
+## Code Patterns Explanation
+Please find within each folder `/api` and `/dashboard` the `README.md` file that explains the code patterns of each code repository.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 <!-- LICENSE -->
 <a name="license"/>
+
+<!-- CONTACT INFORMATION -->
+<a name="contact-information"/>
+
+## Contact Information
+* Email: nhthuan20@gmail.com
+* WhatsApp/Telegram: +84 70 284 5158
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## License
 MIT License
