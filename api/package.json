@@ -22,7 +22,7 @@
     "start": "ts-node src/index.ts",
     "test:lint": "tslint --project . && prettier \"src/**/*.ts\" --list-different",
     "test:types": "tsc -p . --noEmit",
-    "test:unit": "jest --watch",
+    "test:unit": "jest --watch --verbose",
     "test:unit:ci": "jest --ci"
   },
   "dependencies": {

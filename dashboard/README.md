@@ -1,28 +1,13 @@
-# Connect Next.js with GraphQL API using Apollo Client 3
+## Frontend Code Patterns Description
 
-YouTube video: https://www.youtube.com/watch?v=4yDrtFUbUzo
-## Features
-* Don't have to use getServerSideProps or getStaticProps for SSR
-* Typed hooks generated from the GraphQL schema
+<a name="top"/>
 
-## Bootstrap Next.js project
-* Create app with `npx create-next-app`
-* Convert to TypeScript project
-* Install dependencies
-## Connect to GraphQL API
-* Create Apollo HOC with the  `next-with-apollo` modules
-* How to control client-side and server-side rendering
+The frontend is using NextJS framework (view more: https://nextjs.org/). 
 
-## Generate Type, hooks with graphql-code generator
+The code pattern is mainly inspired by this blog post here: https://dev.to/ornio/container-view-pattern-in-react-inc-hooks-5404)
+There are two types of components: `container` and `view/renderer` components.
 
-## Let's keep in touch
-- [Subscribe on YouTube](https://www.youtube.com/TomDoesTech)
-- [Discord](https://discord.gg/4ae2Esm6P7)
-- [Twitter](https://twitter.com/tomdoes_tech)
-- [TikTok](https://www.tiktok.com/@tomdoestech)
-- [Facebook](https://www.facebook.com/tomdoestech)
-- [Instagram](https://www.instagram.com/tomdoestech)
+* `container`: handles all business logics, API calls, passes the props down to view/renderer. Can be re-used. Never renders visual elements.
+* `view/renderer`: can be considered as "dumb" components, sometimes handle internal states. Never does business logic/make API calls. Their only job is to render visual elements.
 
-[Buy me a Coffee](https://www.buymeacoffee.com/tomn)
-
-[Sign up to DigitalOcean 💖](https://m.do.co/c/1b74cb8c56f4)
+<p align="right">(<a href="#top">back to top</a>)</p>

@@ -29,7 +29,7 @@ const ScanRow: React.FC<IScanRowProps> = ({
           {scan.repositoryName}
         </Link>
       </Table.Cell>
-      <Table.Cell>{scan.status}</Table.Cell>
+      <Table.Cell>{`${scan.status} - ${scan.id}`}</Table.Cell>
       <Table.Cell>
         <Label color="yellow">
           <Icon name="warning sign" /> {scan.findings.length}
