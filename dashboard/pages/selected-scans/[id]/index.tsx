@@ -29,6 +29,7 @@ interface ISelectedScansPageProps {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { query } = ctx;
+  console.log(query);
   const apollo = generateApollo({}, ctx, true);
   const { data } = await apollo.query({
     query: getScanQuery,

@@ -36,7 +36,7 @@ exports[`Scan Input Form Page:  + matches snapshot 1`] = `
             <input
               aria-describedby={null}
               onChange={[Function]}
-              placeholder="SDConnect"
+              placeholder="Guardrailsio"
               type="text"
               value=""
             />
@@ -157,6 +157,11 @@ exports[`Scan Input Form Page:  + matches snapshot 1`] = `
         >
           Findings Input
         </h4>
+        <div
+          className="mantine-Text-root mantine-qw4l90"
+        >
+          * You need at least 1 findings to submit the scan result
+        </div>
         <div
           className="ui segment"
         >
