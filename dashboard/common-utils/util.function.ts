@@ -15,8 +15,8 @@ export function getAgoTime(date: Date) {
   return formatDistance(new Date(date), new Date(), { includeSeconds: true });
 }
 
-export function removeTypename({ typename, ...obj }: any) {
-  if (!typename) throw "typename is not existed";
+export function removeTypename({ __typename, ...obj }: any) {
+  if (!__typename) throw "typename is not existed";
   if (obj === undefined) throw "object is not existed";
   return obj;
 }

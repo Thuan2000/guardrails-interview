@@ -57,7 +57,7 @@
            <Form onSubmit={handleSubmit(onSubmit)}>
              <Form.Input
                label="Repository Name"
-               placeholder="SDConnect"
+               placeholder="Guardrailsio"
                value={getValues("repositoryName") || ""}
                onChange={(e) =>
                  handleInputChange("repositoryName", e.target.value)

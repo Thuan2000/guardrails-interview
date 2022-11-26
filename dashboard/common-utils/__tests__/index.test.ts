@@ -85,7 +85,7 @@ describe('Utility functions unit testing: ', () => {
 
   it('+ with input: { typename: "typename", object: "object" }, removeTypename should return { object: "object" }', () => {
     expect(removeTypename({
-      typename: "typename",
+      __typename: "typename",
       object: "object"
     })).toStrictEqual({ object: "object" });
   })
